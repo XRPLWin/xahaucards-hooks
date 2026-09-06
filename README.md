@@ -9,36 +9,34 @@ issues and questions are welcome.
 
 ## What you can check
 
-The bytecode of a deployed hook is committed to on ledger: each account's
-`Hook` object names a `HookDefinition` by the sha256 of its wasm. So:
+Each account's `Hook` object names a `HookDefinition` by its `HookHash`, which
+is the SHA-512-half of the wasm. So:
 
 ```bash
 ./build.sh
-sha256sum build/*.wasm
 ```
 
-If those digests match the `HookHash` entries on the two accounts, the code in
+prints, for each of the four files, its SHA-256 and the `HookHash` the ledger
+shows for it. If that `HookHash` matches the one on the account, the code in
 this repository is the code that is running. Nothing else has to be trusted —
-not this README, not the person who published it.
+not this README, not the person who published it. `sha256sum build/*.wasm` gives
+the SHA-256 column on its own, for a quick check against the table.
 
 The build runs entirely inside a container built from the `Dockerfile` here, so
 the toolchain is pinned rather than whatever happens to be installed.
 
-| file | sha256 |
-| --- | --- |
-| `shop.wasm` | 9d38306572c08dcf0e95ea969cffd2989e37169414028e88427820a6b5556917 |
-| `doors.wasm` | 40d04eafa7c8aa3d8ae54dd7c4006c8a5008d8413e9f5a3336ea424592343503 |
-| `mint.wasm` | 832ea89bdc10b152cdc525304496f199c4cb7d25c9ca4628e59caad4c3900ca5 |
-| `manager.wasm` | d93905c5d31893c8277e9cbe6794a31aac174e9f2c8ef682146c0d5812cc4b9b |
+The `HookHash` column links to the explorer's page for that definition — on
+mainnet, and on testnet where the same build is installed first.
 
-`build/SOURCES.sha256` carries the same digests alongside the sources they were
-built from.
+| file | sha256 | HookHash on ledger |
+| --- | --- | --- |
+| `shop.wasm` | 9d38306572c08dcf0e95ea969cffd2989e37169414028e88427820a6b5556917 | [C650B566C37E06ECFB005B6037EA04348FF360FAB166FCBBA673CBCADBE3FBFE](https://xahau.xrplwin.com/hook/C650B566C37E06ECFB005B6037EA04348FF360FAB166FCBBA673CBCADBE3FBFE) · [testnet](https://xahau-testnet.xrplwin.com/hook/C650B566C37E06ECFB005B6037EA04348FF360FAB166FCBBA673CBCADBE3FBFE) |
+| `doors.wasm` | 40d04eafa7c8aa3d8ae54dd7c4006c8a5008d8413e9f5a3336ea424592343503 | [C16AC4E5A655D7FB32C8E3070036EE2D6DBAEA6A6F84DA1B15DD8140F5D8647D](https://xahau.xrplwin.com/hook/C16AC4E5A655D7FB32C8E3070036EE2D6DBAEA6A6F84DA1B15DD8140F5D8647D) · [testnet](https://xahau-testnet.xrplwin.com/hook/C16AC4E5A655D7FB32C8E3070036EE2D6DBAEA6A6F84DA1B15DD8140F5D8647D) |
+| `mint.wasm` | 832ea89bdc10b152cdc525304496f199c4cb7d25c9ca4628e59caad4c3900ca5 | [E1055384729A5D3E7BF44F39A2DA2F213A2E7D6B888BB0DD2D3B5A9608FD7979](https://xahau.xrplwin.com/hook/E1055384729A5D3E7BF44F39A2DA2F213A2E7D6B888BB0DD2D3B5A9608FD7979) · [testnet](https://xahau-testnet.xrplwin.com/hook/E1055384729A5D3E7BF44F39A2DA2F213A2E7D6B888BB0DD2D3B5A9608FD7979) |
+| `manager.wasm` | d93905c5d31893c8277e9cbe6794a31aac174e9f2c8ef682146c0d5812cc4b9b | [3B1A785C9C14C16D2A807330079EF60F6DEA08146D80BC139DBE5A6812387696](https://xahau.xrplwin.com/hook/3B1A785C9C14C16D2A807330079EF60F6DEA08146D80BC139DBE5A6812387696) · [testnet](https://xahau-testnet.xrplwin.com/hook/3B1A785C9C14C16D2A807330079EF60F6DEA08146D80BC139DBE5A6812387696) |
 
-Note that `HookHash` on ledger is the SHA-512-half of the wasm, while the table
-above and `sha256sum` give SHA-256. Compare like with like: the `HookDefinition`
-object a `Hook` entry points at is keyed by the SHA-512-half, so either recompute
-that from `build/*.wasm` or trust the SHA-256 match against a build you made
-yourself. The first independent report below tripped over this.
+`build/SOURCES.sha256` carries the SHA-256 digests alongside the sources they
+were built from.
 
 ## The four hooks
 
@@ -84,10 +82,10 @@ transactions a pack takes. That balance is the operator's to top up.
 
 ## Independent reports
 
-External reviews of these hooks live under `independant-reports/`, as
+External reviews of these hooks live under `independent-reports/`, as
 delivered, with a response beside each saying what changed because of it.
 
 | report | response |
 | --- | --- |
-| [report-1](independant-reports/report-1/hook-audit.md) — live testnet audit, September 2026 | [report-1-response.md](independant-reports/report-1-response.md) |
+| [report-1](independent-reports/report-1/hook-audit.md) — live testnet audit, September 2026 | [report-1-response.md](independent-reports/report-1-response.md) |
 

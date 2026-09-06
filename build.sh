@@ -118,6 +118,7 @@ done
 
 CBAK_LIST="${CBAK_HOOKS[*]}" HOOK_LIST="${HOOKS[*]}" node --input-type=module -e "
 import { readFileSync } from 'node:fs';
+import { createHash } from 'node:crypto';
 
 const hooks = process.env.HOOK_LIST.split(' ');
 const withCbak = new Set(process.env.CBAK_LIST.split(' '));
@@ -152,6 +153,12 @@ for (const name of hooks) {
 
   console.log('  built      build/' + name + '.wasm (' + wasm.length + ' bytes'
     + (hasCbak ? ', with callback' : '') + ')');
+
+  // What the ledger will call it. A HookDefinition is keyed by the SHA-512-half
+  // of its wasm, not the SHA-256 that sha256sum and SOURCES.sha256 give — so
+  // this is the value to compare against a Hook object's HookHash, and the one
+  // the public README's table links to on the explorer.
+  console.log('             HookHash ' + createHash('sha512').update(wasm).digest('hex').slice(0, 64).toUpperCase());
 }
 " || exit 1
 
@@ -205,8 +212,6 @@ if [ -f "$HERE/export-public.mjs" ]; then
     echo "    XAHAU_HOOK_SEED_SHOP=s... XAHAU_HOOK_SEED_ISSUER=s... node hook/deploy.mjs"
 else
     echo
-    echo "  Compare these against the accounts they run on:"
-    echo "    sha256sum build/*.wasm"
-    echo
-    echo "  A matching digest means the source here is the code on ledger."
+    echo "  Compare the HookHash printed above against the Hook objects on the two"
+    echo "  accounts. A match means the source here is the code on ledger."
 fi
