@@ -1,0 +1,526 @@
+{
+  "network": "wss://xahau-test.net",
+  "addresses": {
+    "shop": "rfttwgbFPKLSuD2yf2NGTk4qhnZMozGCbp",
+    "issuer": "rss6oKBRfJAyJFHQYG7VPfAtuam9cbbpWn",
+    "buyer": "refuGbntXXeBMGJ7Eym9p1hb2pLWVqBBP",
+    "claim": "rn6ybgQjNsBkb2SU9vydYhQgiATPNr1RXd",
+    "attestor": "rErfEEqJph8VQMJAF3gw7PPsfx9452RK3v",
+    "outsider": "rpPEyJYwqvfCXDYJH2RDsuj4eixe5nS6BY",
+    "blocker": "rBnvCdpT7FHHCZj7Pm7idNgUtdRzvc6W9K",
+    "ghost": "r4t5kTe2YNNeX8aDNCLzWpAt8mX4k7GApb"
+  },
+  "explorers": {
+    "shop": "https://test.xahauexplorer.com/en/account/rfttwgbFPKLSuD2yf2NGTk4qhnZMozGCbp",
+    "issuer": "https://test.xahauexplorer.com/en/account/rss6oKBRfJAyJFHQYG7VPfAtuam9cbbpWn",
+    "buyer": "https://test.xahauexplorer.com/en/account/refuGbntXXeBMGJ7Eym9p1hb2pLWVqBBP",
+    "claim": "https://test.xahauexplorer.com/en/account/rn6ybgQjNsBkb2SU9vydYhQgiATPNr1RXd",
+    "attestor": "https://test.xahauexplorer.com/en/account/rErfEEqJph8VQMJAF3gw7PPsfx9452RK3v",
+    "outsider": "https://test.xahauexplorer.com/en/account/rpPEyJYwqvfCXDYJH2RDsuj4eixe5nS6BY",
+    "blocker": "https://test.xahauexplorer.com/en/account/rBnvCdpT7FHHCZj7Pm7idNgUtdRzvc6W9K",
+    "ghost": "https://test.xahauexplorer.com/en/account/r4t5kTe2YNNeX8aDNCLzWpAt8mX4k7GApb"
+  },
+  "findings": [],
+  "tests": [
+    {
+      "id": "install shop+doors",
+      "role": "shop",
+      "engine": "tesSUCCESS",
+      "message": "The transaction was applied. Only final in a validated ledger.",
+      "hash": "265E91F424C2CA8CFA6D42DBCD1D21ADBD14CFD40EF0EA73E0EA9CEB17A4F4C5",
+      "explorer": "https://test.xahauexplorer.com/explorer/265E91F424C2CA8CFA6D42DBCD1D21ADBD14CFD40EF0EA73E0EA9CEB17A4F4C5",
+      "hooks": []
+    },
+    {
+      "id": "install mint+manager",
+      "role": "issuer",
+      "engine": "tesSUCCESS",
+      "message": "The transaction was applied. Only final in a validated ledger.",
+      "hash": "D1E6184C44DBD2C743B0F69AC328898D2EDA1604C770F0B5D4F6132B8E4B5A76",
+      "explorer": "https://test.xahauexplorer.com/explorer/D1E6184C44DBD2C743B0F69AC328898D2EDA1604C770F0B5D4F6132B8E4B5A76",
+      "hooks": []
+    },
+    {
+      "id": "settings-intended#0",
+      "role": "issuer",
+      "engine": "tesSUCCESS",
+      "message": "The transaction was applied. Only final in a validated ledger.",
+      "hash": "36379A8A653CF7131A55590133D707A17287A01FEEA58AB30E19E31DA606BB70",
+      "explorer": "https://test.xahauexplorer.com/explorer/36379A8A653CF7131A55590133D707A17287A01FEEA58AB30E19E31DA606BB70",
+      "hooks": []
+    },
+    {
+      "id": "table#0",
+      "role": "issuer",
+      "engine": "tesSUCCESS",
+      "message": "The transaction was applied. Only final in a validated ledger.",
+      "hash": "D5F9DC276C7DFE409FBD499F648D8923CA1080340E58A9EF8AD67AE3003966AD",
+      "explorer": "https://test.xahauexplorer.com/explorer/D5F9DC276C7DFE409FBD499F648D8923CA1080340E58A9EF8AD67AE3003966AD",
+      "hooks": []
+    },
+    {
+      "id": "table#1",
+      "role": "issuer",
+      "engine": "tesSUCCESS",
+      "message": "The transaction was applied. Only final in a validated ledger.",
+      "hash": "C13EF9CC6E00C2D0F0098EF9AACBFF16BA467A0B4E5E43ED1822CA5F5E4355D3",
+      "explorer": "https://test.xahauexplorer.com/explorer/C13EF9CC6E00C2D0F0098EF9AACBFF16BA467A0B4E5E43ED1822CA5F5E4355D3",
+      "hooks": []
+    },
+    {
+      "id": "table#2",
+      "role": "issuer",
+      "engine": "tesSUCCESS",
+      "message": "The transaction was applied. Only final in a validated ledger.",
+      "hash": "C685951B3F6B4EA77ED77A414E75D9AE90AF372B7385AA99D868220F5F7B493B",
+      "explorer": "https://test.xahauexplorer.com/explorer/C685951B3F6B4EA77ED77A414E75D9AE90AF372B7385AA99D868220F5F7B493B",
+      "hooks": []
+    },
+    {
+      "id": "attestor-roll#0",
+      "role": "issuer",
+      "engine": "tesSUCCESS",
+      "message": "The transaction was applied. Only final in a validated ledger.",
+      "hash": "B90082021D36E035916528DFB087B1DD9E9C70A4DA8F25530D6077F31FD5D1EE",
+      "explorer": "https://test.xahauexplorer.com/explorer/B90082021D36E035916528DFB087B1DD9E9C70A4DA8F25530D6077F31FD5D1EE",
+      "hooks": []
+    },
+    {
+      "id": "outsider admin write PRICE",
+      "role": "outsider",
+      "engine": "tecHOOK_REJECTED",
+      "message": "Rejected by hook on sending or receiving account.",
+      "hash": "D15EE3E67703503B4726A377A041C4B1A0E9373CB936617FD600AF9698C54406",
+      "explorer": "https://test.xahauexplorer.com/explorer/D15EE3E67703503B4726A377A041C4B1A0E9373CB936617FD600AF9698C54406",
+      "hooks": []
+    },
+    {
+      "id": "outsider ALLOW",
+      "role": "outsider",
+      "engine": "tecHOOK_REJECTED",
+      "message": "Rejected by hook on sending or receiving account.",
+      "hash": "4BF149DDFD363392FA27CEF94AD98BCC80A22472FF82787F73C3D1CFE2D58B85",
+      "explorer": "https://test.xahauexplorer.com/explorer/4BF149DDFD363392FA27CEF94AD98BCC80A22472FF82787F73C3D1CFE2D58B85",
+      "hooks": []
+    },
+    {
+      "id": "outsider GRANT",
+      "role": "outsider",
+      "engine": "tecHOOK_REJECTED",
+      "message": "Rejected by hook on sending or receiving account.",
+      "hash": "4FF3827C55FAB76C720D156E57088C8C44043A11BFEE5C5A103EA54A86FF969E",
+      "explorer": "https://test.xahauexplorer.com/explorer/4FF3827C55FAB76C720D156E57088C8C44043A11BFEE5C5A103EA54A86FF969E",
+      "hooks": []
+    },
+    {
+      "id": "outsider ATTEST random id",
+      "role": "outsider",
+      "engine": "tecHOOK_REJECTED",
+      "message": "Rejected by hook on sending or receiving account.",
+      "hash": "E943EAE7F83218598939FE31294C9110245CF239DC01ACC66A2EAE85E0BD14E3",
+      "explorer": "https://test.xahauexplorer.com/explorer/E943EAE7F83218598939FE31294C9110245CF239DC01ACC66A2EAE85E0BD14E3",
+      "hooks": []
+    },
+    {
+      "id": "invoke shop with no GRANT/ALLOW",
+      "role": "buyer",
+      "engine": "tecHOOK_REJECTED",
+      "message": "Rejected by hook on sending or receiving account.",
+      "hash": "35ED8A98BD9BE02D090180ACB848DE547D5E29B178FF241DB5657E25624FA4FC",
+      "explorer": "https://test.xahauexplorer.com/explorer/35ED8A98BD9BE02D090180ACB848DE547D5E29B178FF241DB5657E25624FA4FC",
+      "hooks": []
+    },
+    {
+      "id": "buy 10 XAH intended price",
+      "role": "buyer",
+      "engine": "tesSUCCESS",
+      "message": "The transaction was applied. Only final in a validated ledger.",
+      "hash": "57A855D1F8507B32D7B91F2EB1A342909946219E3081B893244AF4866C7EEC7D",
+      "explorer": "https://test.xahauexplorer.com/explorer/57A855D1F8507B32D7B91F2EB1A342909946219E3081B893244AF4866C7EEC7D",
+      "hooks": []
+    },
+    {
+      "id": "buy 8 drops (len of uint64 PRICE)",
+      "role": "buyer",
+      "engine": "tecHOOK_REJECTED",
+      "message": "Rejected by hook on sending or receiving account.",
+      "hash": "717F4E718CE82A6998CF2CEFDDD55B2F686EF02B056732221F16A5CEBE93E03C",
+      "explorer": "https://test.xahauexplorer.com/explorer/717F4E718CE82A6998CF2CEFDDD55B2F686EF02B056732221F16A5CEBE93E03C",
+      "hooks": []
+    },
+    {
+      "id": "buy 8 drops no THEME",
+      "role": "buyer",
+      "engine": "tecHOOK_REJECTED",
+      "message": "Rejected by hook on sending or receiving account.",
+      "hash": "6A25975BCDB76EA4174E40ED845272B9EC62136EE0D6075AD06F5817F8C7033D",
+      "explorer": "https://test.xahauexplorer.com/explorer/6A25975BCDB76EA4174E40ED845272B9EC62136EE0D6075AD06F5817F8C7033D",
+      "hooks": []
+    },
+    {
+      "id": "settings-cheap-length#0",
+      "role": "issuer",
+      "engine": "tesSUCCESS",
+      "message": "The transaction was applied. Only final in a validated ledger.",
+      "hash": "CBCE4D2A949432DA7C9D092B5EE0326986580730D187733847CA7F54A335BE84",
+      "explorer": "https://test.xahauexplorer.com/explorer/CBCE4D2A949432DA7C9D092B5EE0326986580730D187733847CA7F54A335BE84",
+      "hooks": []
+    },
+    {
+      "id": "buy 10 drops after length-price reconfig",
+      "role": "buyer",
+      "engine": "tecHOOK_REJECTED",
+      "message": "Rejected by hook on sending or receiving account.",
+      "hash": "B6034508F7024FB40FA5E8BEB53CF64F4FF26173BD6A7126B6EB5C5034619C97",
+      "explorer": "https://test.xahauexplorer.com/explorer/B6034508F7024FB40FA5E8BEB53CF64F4FF26173BD6A7126B6EB5C5034619C97",
+      "hooks": []
+    },
+    {
+      "id": "buy 11 drops against length-10 price",
+      "role": "buyer",
+      "engine": "tecHOOK_REJECTED",
+      "message": "Rejected by hook on sending or receiving account.",
+      "hash": "BE64AF7C48664D48953FC95F81D6FD172AFE24AA1C24BD7A7E87E8620827D576",
+      "explorer": "https://test.xahauexplorer.com/explorer/BE64AF7C48664D48953FC95F81D6FD172AFE24AA1C24BD7A7E87E8620827D576",
+      "hooks": []
+    },
+    {
+      "id": "top-up 1 XAH (should skip mint)",
+      "role": "buyer",
+      "engine": "tesSUCCESS",
+      "message": "The transaction was applied. Only final in a validated ledger.",
+      "hash": "3890C982C4D080781D059C32372709AD492F8E66CD2EEA72E0FB8801138EE8B8",
+      "explorer": "https://test.xahauexplorer.com/explorer/3890C982C4D080781D059C32372709AD492F8E66CD2EEA72E0FB8801138EE8B8",
+      "hooks": []
+    },
+    {
+      "id": "partial payment flag",
+      "role": "buyer",
+      "engine": "temBAD_SEND_NATIVE_MAX",
+      "message": "Malformed: Send max is not allowed for XAH to XAH.",
+      "hash": "EA564FFD5BA8573B7860686992127586CC6C5C8BD7E3B065D60DAE4369501D73",
+      "explorer": "https://test.xahauexplorer.com/explorer/EA564FFD5BA8573B7860686992127586CC6C5C8BD7E3B065D60DAE4369501D73",
+      "hooks": []
+    },
+    {
+      "id": "exact cheap price, no THEME",
+      "role": "buyer",
+      "engine": "tecHOOK_REJECTED",
+      "message": "Rejected by hook on sending or receiving account.",
+      "hash": "3E1494A66B01C2C2C14875A9DE5134661FF8847CDAAF36DDA2800D12639D82C3",
+      "explorer": "https://test.xahauexplorer.com/explorer/3E1494A66B01C2C2C14875A9DE5134661FF8847CDAAF36DDA2800D12639D82C3",
+      "hooks": []
+    },
+    {
+      "id": "THEME 99 missing set",
+      "role": "buyer",
+      "engine": "tecHOOK_REJECTED",
+      "message": "Rejected by hook on sending or receiving account.",
+      "hash": "D7083403DD745C25ABAB6CFA2071C5E3D6A32C50E82482613A294077E8487562",
+      "explorer": "https://test.xahauexplorer.com/explorer/D7083403DD745C25ABAB6CFA2071C5E3D6A32C50E82482613A294077E8487562",
+      "hooks": []
+    },
+    {
+      "id": "THEME 03 closed sale",
+      "role": "buyer",
+      "engine": "tecHOOK_REJECTED",
+      "message": "Rejected by hook on sending or receiving account.",
+      "hash": "B78523BB43AC0E4EFDB9944744CBF03AD8A65269EE3D9683329D9D342F7320C3",
+      "explorer": "https://test.xahauexplorer.com/explorer/B78523BB43AC0E4EFDB9944744CBF03AD8A65269EE3D9683329D9D342F7320C3",
+      "hooks": []
+    },
+    {
+      "id": "THEME binary 0001 not ascii",
+      "role": "buyer",
+      "engine": "tecHOOK_REJECTED",
+      "message": "Rejected by hook on sending or receiving account.",
+      "hash": "FA80313899CF0F87A1ACC99965A50204329A87FC45D6AB647208E560556A0A68",
+      "explorer": "https://test.xahauexplorer.com/explorer/FA80313899CF0F87A1ACC99965A50204329A87FC45D6AB647208E560556A0A68",
+      "hooks": []
+    },
+    {
+      "id": "blocker DisallowIncomingRemit",
+      "role": "blocker",
+      "engine": "tesSUCCESS",
+      "message": "The transaction was applied. Only final in a validated ledger.",
+      "hash": "0DE56DA8D4CBD35C9447CAABBEFC1B50046C5B5A1B004DE71EB1777F17CB1778",
+      "explorer": "https://test.xahauexplorer.com/explorer/0DE56DA8D4CBD35C9447CAABBEFC1B50046C5B5A1B004DE71EB1777F17CB1778",
+      "hooks": []
+    },
+    {
+      "id": "seed blocker with extra XAH",
+      "role": "buyer",
+      "engine": "tesSUCCESS",
+      "message": "The transaction was applied. Only final in a validated ledger.",
+      "hash": "871802E47CD30C5A73ADAC345DF3F0772F23551D3C56D6B0162F4B1469F09C8F",
+      "explorer": "https://test.xahauexplorer.com/explorer/871802E47CD30C5A73ADAC345DF3F0772F23551D3C56D6B0162F4B1469F09C8F",
+      "hooks": []
+    },
+    {
+      "id": "buy from DisallowIncomingRemit account",
+      "role": "blocker",
+      "engine": "tecHOOK_REJECTED",
+      "message": "Rejected by hook on sending or receiving account.",
+      "hash": "A3C97F74CAB50D6026FEB2B904CD6C525AECF2251AB03C31BA2208C56A7D6B07",
+      "explorer": "https://test.xahauexplorer.com/explorer/A3C97F74CAB50D6026FEB2B904CD6C525AECF2251AB03C31BA2208C56A7D6B07",
+      "hooks": []
+    },
+    {
+      "id": "blocker DepositAuth",
+      "role": "blocker",
+      "engine": "tesSUCCESS",
+      "message": "The transaction was applied. Only final in a validated ledger.",
+      "hash": "280DAC5432B7A7C509A1F157838EEE5A0E568A35D6C01F562B31D20D4CFE97FB",
+      "explorer": "https://test.xahauexplorer.com/explorer/280DAC5432B7A7C509A1F157838EEE5A0E568A35D6C01F562B31D20D4CFE97FB",
+      "hooks": []
+    },
+    {
+      "id": "buy from DepositAuth account",
+      "role": "blocker",
+      "engine": "tecHOOK_REJECTED",
+      "message": "Rejected by hook on sending or receiving account.",
+      "hash": "C554C04E75346DD123B3CA4B42B01F93CA0E7DFAA6F14D5B04D92795ACB2BA0E",
+      "explorer": "https://test.xahauexplorer.com/explorer/C554C04E75346DD123B3CA4B42B01F93CA0E7DFAA6F14D5B04D92795ACB2BA0E",
+      "hooks": []
+    },
+    {
+      "id": "direct payment to issuer (should pass, not mint)",
+      "role": "buyer",
+      "engine": "tesSUCCESS",
+      "message": "The transaction was applied. Only final in a validated ledger.",
+      "hash": "C770E3515A11BD7241230BC3D9F5146F2DEC811F51163BA5374FF1FFBC47EC6A",
+      "explorer": "https://test.xahauexplorer.com/explorer/C770E3515A11BD7241230BC3D9F5146F2DEC811F51163BA5374FF1FFBC47EC6A",
+      "hooks": []
+    },
+    {
+      "id": "unsigned shop->issuer payment (not emitted)",
+      "role": "shop",
+      "engine": "tesSUCCESS",
+      "message": "The transaction was applied. Only final in a validated ledger.",
+      "hash": "978616A54B272ABCE6BA027E3E770F12FB1E0235BFC4F4BB7B15BB16F2998B8D",
+      "explorer": "https://test.xahauexplorer.com/explorer/978616A54B272ABCE6BA027E3E770F12FB1E0235BFC4F4BB7B15BB16F2998B8D",
+      "hooks": []
+    },
+    {
+      "id": "ALLOW 2 grants",
+      "role": "shop",
+      "engine": "tesSUCCESS",
+      "message": "The transaction was applied. Only final in a validated ledger.",
+      "hash": "C9165B09950B6909C031D265B936C6C7A4BFAAB94040C7EA92216E1E9DAE94D1",
+      "explorer": "https://test.xahauexplorer.com/explorer/C9165B09950B6909C031D265B936C6C7A4BFAAB94040C7EA92216E1E9DAE94D1",
+      "hooks": []
+    },
+    {
+      "id": "GRANT 1/5 after ALLOW 2",
+      "role": "claim",
+      "engine": "tecHOOK_REJECTED",
+      "message": "Rejected by hook on sending or receiving account.",
+      "hash": "660E94A356734193E75BA8BA07B02DE6CAFB3EA79487DFFD303C961E3896979C",
+      "explorer": "https://test.xahauexplorer.com/explorer/660E94A356734193E75BA8BA07B02DE6CAFB3EA79487DFFD303C961E3896979C",
+      "hooks": []
+    },
+    {
+      "id": "GRANT 2/5 after ALLOW 2",
+      "role": "claim",
+      "engine": "tecHOOK_REJECTED",
+      "message": "Rejected by hook on sending or receiving account.",
+      "hash": "DBABAEAAF6097715EFCAAAB0EC1CE15B6E050B892D212A6C766876CEBA6A25BF",
+      "explorer": "https://test.xahauexplorer.com/explorer/DBABAEAAF6097715EFCAAAB0EC1CE15B6E050B892D212A6C766876CEBA6A25BF",
+      "hooks": []
+    },
+    {
+      "id": "GRANT 3/5 after ALLOW 2",
+      "role": "claim",
+      "engine": "tecHOOK_REJECTED",
+      "message": "Rejected by hook on sending or receiving account.",
+      "hash": "B241EA408F71871F9D90B2F9BF25F2FA59044E442E3623D7EE0417E2EC7F5130",
+      "explorer": "https://test.xahauexplorer.com/explorer/B241EA408F71871F9D90B2F9BF25F2FA59044E442E3623D7EE0417E2EC7F5130",
+      "hooks": []
+    },
+    {
+      "id": "GRANT 4/5 after ALLOW 2",
+      "role": "claim",
+      "engine": "tecHOOK_REJECTED",
+      "message": "Rejected by hook on sending or receiving account.",
+      "hash": "9DFA521117BDA156AAC8353984EB2F02B61C7ACCF0A237303F01CD115A930805",
+      "explorer": "https://test.xahauexplorer.com/explorer/9DFA521117BDA156AAC8353984EB2F02B61C7ACCF0A237303F01CD115A930805",
+      "hooks": []
+    },
+    {
+      "id": "GRANT 5/5 after ALLOW 2",
+      "role": "claim",
+      "engine": "tecHOOK_REJECTED",
+      "message": "Rejected by hook on sending or receiving account.",
+      "hash": "8984789570CBBA2B81A3B15BEF1AED6CD2B981C22BA95C0B8071EDB39A3402F1",
+      "explorer": "https://test.xahauexplorer.com/explorer/8984789570CBBA2B81A3B15BEF1AED6CD2B981C22BA95C0B8071EDB39A3402F1",
+      "hooks": []
+    },
+    {
+      "id": "GRANT 21-byte payload",
+      "role": "claim",
+      "engine": "tecHOOK_REJECTED",
+      "message": "Rejected by hook on sending or receiving account.",
+      "hash": "A332246BDE47812CBF64EE9AE388B9DB4C06F0EEAF05A4F05C293F216400F775",
+      "explorer": "https://test.xahauexplorer.com/explorer/A332246BDE47812CBF64EE9AE388B9DB4C06F0EEAF05A4F05C293F216400F775",
+      "hooks": []
+    },
+    {
+      "id": "GRANT to unfunded ghost account",
+      "role": "claim",
+      "engine": "tecHOOK_REJECTED",
+      "message": "Rejected by hook on sending or receiving account.",
+      "hash": "BEC5D28E57A5FC36CB63B90FB961DCF521EA322CFC921A3AD66D9234C5DE3078",
+      "explorer": "https://test.xahauexplorer.com/explorer/BEC5D28E57A5FC36CB63B90FB961DCF521EA322CFC921A3AD66D9234C5DE3078",
+      "hooks": []
+    },
+    {
+      "id": "GRANT closed theme 03",
+      "role": "claim",
+      "engine": "tecHOOK_REJECTED",
+      "message": "Rejected by hook on sending or receiving account.",
+      "hash": "4A38B6CB8BA911A602C20D866B950B775B33864A9F59A6184677CA788AAD0E5C",
+      "explorer": "https://test.xahauexplorer.com/explorer/4A38B6CB8BA911A602C20D866B950B775B33864A9F59A6184677CA788AAD0E5C",
+      "hooks": []
+    },
+    {
+      "id": "pack buy 1/8",
+      "role": "buyer",
+      "engine": "tecHOOK_REJECTED",
+      "message": "Rejected by hook on sending or receiving account.",
+      "hash": "BB8DC6E297B2B736E266E1FE2A452F9F619AFA419E432B69D7AF11AE612909FD",
+      "explorer": "https://test.xahauexplorer.com/explorer/BB8DC6E297B2B736E266E1FE2A452F9F619AFA419E432B69D7AF11AE612909FD",
+      "hooks": []
+    },
+    {
+      "id": "pack buy 2/8",
+      "role": "buyer",
+      "engine": "tecHOOK_REJECTED",
+      "message": "Rejected by hook on sending or receiving account.",
+      "hash": "15F15C8E4C0523FDD56A42D6621F73E6ABB0E26E1B4E974AE8540C90A30916F4",
+      "explorer": "https://test.xahauexplorer.com/explorer/15F15C8E4C0523FDD56A42D6621F73E6ABB0E26E1B4E974AE8540C90A30916F4",
+      "hooks": []
+    },
+    {
+      "id": "pack buy 3/8",
+      "role": "buyer",
+      "engine": "tecHOOK_REJECTED",
+      "message": "Rejected by hook on sending or receiving account.",
+      "hash": "562AC0B5C162EBB32D655763FFB1D9DFCE90EA44A4625B59CCCA55E5C24AC3D3",
+      "explorer": "https://test.xahauexplorer.com/explorer/562AC0B5C162EBB32D655763FFB1D9DFCE90EA44A4625B59CCCA55E5C24AC3D3",
+      "hooks": []
+    },
+    {
+      "id": "pack buy 4/8",
+      "role": "buyer",
+      "engine": "tecHOOK_REJECTED",
+      "message": "Rejected by hook on sending or receiving account.",
+      "hash": "4E8FFF592FD0023925478AC15E686F746CDD6953B97391D9655F4E0993288A10",
+      "explorer": "https://test.xahauexplorer.com/explorer/4E8FFF592FD0023925478AC15E686F746CDD6953B97391D9655F4E0993288A10",
+      "hooks": []
+    },
+    {
+      "id": "pack buy 5/8",
+      "role": "buyer",
+      "engine": "tecHOOK_REJECTED",
+      "message": "Rejected by hook on sending or receiving account.",
+      "hash": "1A920AFF35A36444EB0C782A9CA49CCFD96C60FE05BE0F7BDC01F93101E979A8",
+      "explorer": "https://test.xahauexplorer.com/explorer/1A920AFF35A36444EB0C782A9CA49CCFD96C60FE05BE0F7BDC01F93101E979A8",
+      "hooks": []
+    },
+    {
+      "id": "pack buy 6/8",
+      "role": "buyer",
+      "engine": "tecHOOK_REJECTED",
+      "message": "Rejected by hook on sending or receiving account.",
+      "hash": "52ED39D1ED147354FEAA9CA2FAA139C42175CBB1DBEE8EFD613232D2EA97E768",
+      "explorer": "https://test.xahauexplorer.com/explorer/52ED39D1ED147354FEAA9CA2FAA139C42175CBB1DBEE8EFD613232D2EA97E768",
+      "hooks": []
+    },
+    {
+      "id": "pack buy 7/8",
+      "role": "buyer",
+      "engine": "tecHOOK_REJECTED",
+      "message": "Rejected by hook on sending or receiving account.",
+      "hash": "E1A254354F0ED09410AE68A748AF0D8E3D9743E87C5E118FC5D50E7850835B22",
+      "explorer": "https://test.xahauexplorer.com/explorer/E1A254354F0ED09410AE68A748AF0D8E3D9743E87C5E118FC5D50E7850835B22",
+      "hooks": []
+    },
+    {
+      "id": "pack buy 8/8",
+      "role": "buyer",
+      "engine": "tecHOOK_REJECTED",
+      "message": "Rejected by hook on sending or receiving account.",
+      "hash": "B9FDEB6086B8E7E808F6B67E9FB9AFE15FE8D21DAA05933779AB9048D522A73A",
+      "explorer": "https://test.xahauexplorer.com/explorer/B9FDEB6086B8E7E808F6B67E9FB9AFE15FE8D21DAA05933779AB9048D522A73A",
+      "hooks": []
+    },
+    {
+      "id": "buy overflow theme 02",
+      "role": "buyer",
+      "engine": "tecHOOK_REJECTED",
+      "message": "Rejected by hook on sending or receiving account.",
+      "hash": "53DECC8043D32E97AEC849CFADD3BF9551786D1828D010477002A6761E3E2988",
+      "explorer": "https://test.xahauexplorer.com/explorer/53DECC8043D32E97AEC849CFADD3BF9551786D1828D010477002A6761E3E2988",
+      "hooks": []
+    },
+    {
+      "id": "issuer mints non-card URIToken",
+      "role": "issuer",
+      "engine": "tesSUCCESS",
+      "message": "The transaction was applied. Only final in a validated ledger.",
+      "hash": "B1C6065F8743B8881258C6F07D1994898BEB57E74D15AC76BBDA25C6FFD3F393",
+      "explorer": "https://test.xahauexplorer.com/explorer/B1C6065F8743B8881258C6F07D1994898BEB57E74D15AC76BBDA25C6FFD3F393",
+      "hooks": []
+    },
+    {
+      "id": "ATTEST non-card URIToken",
+      "role": "attestor",
+      "engine": "tecHOOK_REJECTED",
+      "message": "Rejected by hook on sending or receiving account.",
+      "hash": "CED4F9BECCD0A462BE4C0C01F8D959B27E1B7C89B5E7634D2FFEE2D31E9E64C5",
+      "explorer": "https://test.xahauexplorer.com/explorer/CED4F9BECCD0A462BE4C0C01F8D959B27E1B7C89B5E7634D2FFEE2D31E9E64C5",
+      "hooks": []
+    },
+    {
+      "id": "ATTEST real card",
+      "role": "attestor",
+      "engine": "tesSUCCESS",
+      "message": "The transaction was applied. Only final in a validated ledger.",
+      "hash": "C95D70E8E1EAC4E5190571C6D355A10BB17B7812D70CE2753011512458B4AEC0",
+      "explorer": "https://test.xahauexplorer.com/explorer/C95D70E8E1EAC4E5190571C6D355A10BB17B7812D70CE2753011512458B4AEC0",
+      "hooks": []
+    },
+    {
+      "id": "ATTEST same card again",
+      "role": "attestor",
+      "engine": "tecHOOK_REJECTED",
+      "message": "Rejected by hook on sending or receiving account.",
+      "hash": "1396FBF32FBD1CE766E033381F42858C0AE5F9C3488ADD84CEF4496BF8480E6E",
+      "explorer": "https://test.xahauexplorer.com/explorer/1396FBF32FBD1CE766E033381F42858C0AE5F9C3488ADD84CEF4496BF8480E6E",
+      "hooks": []
+    },
+    {
+      "id": "shop outgoing payment (should pass hook)",
+      "role": "shop",
+      "engine": "tesSUCCESS",
+      "message": "The transaction was applied. Only final in a validated ledger.",
+      "hash": "9C4B0930E3D8D20E369D2D5764D96A4E2F1D0FFBD1088BF8AFD828603FF710F5",
+      "explorer": "https://test.xahauexplorer.com/explorer/9C4B0930E3D8D20E369D2D5764D96A4E2F1D0FFBD1088BF8AFD828603FF710F5",
+      "hooks": []
+    },
+    {
+      "id": "admin NS=E write MINTCOUNT",
+      "role": "issuer",
+      "engine": "tecHOOK_REJECTED",
+      "message": "Rejected by hook on sending or receiving account.",
+      "hash": "32DEF9B4D1F47406DE08A9B52DB10739EF95F9A08BB0821496EC964B31D510F9",
+      "explorer": "https://test.xahauexplorer.com/explorer/32DEF9B4D1F47406DE08A9B52DB10739EF95F9A08BB0821496EC964B31D510F9",
+      "hooks": []
+    }
+  ],
+  "snapHint": {
+    "shopHookCount": 1,
+    "issuerHookCount": 2,
+    "buyerObjects": 5
+  }
+}

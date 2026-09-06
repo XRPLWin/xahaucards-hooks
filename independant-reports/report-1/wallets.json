@@ -1,0 +1,44 @@
+{
+  "network": "wss://xahau-test.net",
+  "created": "2026-09-06T17:14:09.887Z",
+  "shop": {
+    "address": "rfttwgbFPKLSuD2yf2NGTk4qhnZMozGCbp",
+    "seed": "ssXxeBhBT5GBv46WkcQ3xBwV4KaCE",
+    "role": "shop"
+  },
+  "issuer": {
+    "address": "rss6oKBRfJAyJFHQYG7VPfAtuam9cbbpWn",
+    "seed": "sa9kJk4bU98M4YG1Q8MNN65unGKu3",
+    "role": "issuer"
+  },
+  "buyer": {
+    "address": "refuGbntXXeBMGJ7Eym9p1hb2pLWVqBBP",
+    "seed": "sp6epmiqPbjyEaTV4dHPuCMg85Ah4",
+    "role": "buyer"
+  },
+  "claim": {
+    "address": "rn6ybgQjNsBkb2SU9vydYhQgiATPNr1RXd",
+    "seed": "ssZB775uENj1zVddxn4yQXjjBiSdY",
+    "role": "claim"
+  },
+  "attestor": {
+    "address": "rErfEEqJph8VQMJAF3gw7PPsfx9452RK3v",
+    "seed": "sst9Qb7CQNwR1G4c6vGz1cK6pxtnR",
+    "role": "attestor"
+  },
+  "outsider": {
+    "address": "rpPEyJYwqvfCXDYJH2RDsuj4eixe5nS6BY",
+    "seed": "sntgAfyfcH7gueypPskrexWryQnPU",
+    "role": "outsider"
+  },
+  "blocker": {
+    "address": "rBnvCdpT7FHHCZj7Pm7idNgUtdRzvc6W9K",
+    "seed": "snUjC38Z4ERwMjHLd2XZ3GzRrHTRp",
+    "role": "blocker"
+  },
+  "ghost": {
+    "address": "r4t5kTe2YNNeX8aDNCLzWpAt8mX4k7GApb",
+    "seed": "shWXbHF8yjWrqrmteHQbFiXXTRSYo",
+    "role": "ghost"
+  }
+}

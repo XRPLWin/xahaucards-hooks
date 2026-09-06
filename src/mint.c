@@ -194,7 +194,7 @@ hook(uint32_t reserved)
 {
     _g(1, 1);
 
-#line 535
+#line 541
     if (otxn_type() != ttPAYMENT)
         DONE("xahaucards: not a Payment, passing.");
 
@@ -206,7 +206,7 @@ hook(uint32_t reserved)
 
     uint8_t parent[32];
 
-#line 565
+#line 571
     if (otxn_slot(1) != 1)
         DONE("xahaucards: could not slot the transaction, passing.");
 
@@ -216,13 +216,13 @@ hook(uint32_t reserved)
     if (slot_subfield(2, sfEmitParentTxnID, 3) != 3)
         DONE("xahaucards: an emitted payment with no parent id, passing.");
 
-#line 576
+#line 582
     if (slot(SBUF(parent), 3) != 32)
         DONE("xahaucards: could not read the parent transaction id, passing.");
 
     uint8_t shop_acc[20];
 
-#line 585
+#line 591
     if (state_foreign(SBUF(shop_acc), SBUF(KEY_SHOP), SBUF(NS_SETTINGS), SBUF(issuer_acc)) != 20)
         NOPE("xahaucards: the shop account is not configured on the issuer.");
 
@@ -231,7 +231,7 @@ hook(uint32_t reserved)
 
     uint8_t intent[INTENT_LEN];
 
-#line 615
+#line 621
     if (state_foreign(SBUF(intent), parent, INTENT_KEY_LEN, SBUF(NS_INTENT), SBUF(shop_acc))
             != (int64_t)INTENT_LEN)
         NOPE("xahaucards: no purchase is recorded for this trigger.");
@@ -241,7 +241,7 @@ hook(uint32_t reserved)
 
     uint8_t last_hash[32];
 
-#line 632
+#line 638
     if (ledger_last_hash(SBUF(last_hash)) != 32)
         NOPE("xahaucards: could not read the last ledger hash.");
 
@@ -262,25 +262,25 @@ hook(uint32_t reserved)
 
     uint8_t shape[64];
 
-#line 654
+#line 660
     if (state_foreign(SBUF(shape), SBUF(dkey), SBUF(NS_TABLE), SBUF(issuer_acc)) != SHAPE_LEN)
         NOPE("xahaucards: that set is not loaded on the issuer.");
 
     uint8_t domain[DOMAIN_MAX];
     int64_t domain_len = state_foreign(SBUF(domain), SBUF(KEY_DOMAIN), SBUF(NS_SETTINGS), SBUF(issuer_acc));
 
-#line 664
+#line 670
     if (domain_len < 1 || domain_len > (int64_t)DOMAIN_MAX)
         NOPE("xahaucards: the card domain is not configured on the issuer.");
 
-#line 673
+#line 679
     if (etxn_reserve(CARDS_PER_PACK * 2U) != CARDS_PER_PACK * 2U)
         NOPE("xahaucards: could not reserve emissions.");
 
     uint32_t fls = (uint32_t)ledger_seq() + 1;
     uint32_t lls = fls + 4;
 
-#line 687
+#line 693
     for (uint32_t idx = 0; GUARD(CARDS_PER_PACK), idx < CARDS_PER_PACK; ++idx)
     {
 
@@ -291,7 +291,7 @@ hook(uint32_t reserved)
 
     uint8_t roll[32];
 
-#line 703
+#line 709
     if (util_sha512h(SBUF(roll), SBUF(card_in)) != 32)
         NOPE("xahaucards: could not derive a card roll.");
 
@@ -301,13 +301,13 @@ hook(uint32_t reserved)
     uint32_t start = BLOCK_START(shape, rarity);
     uint32_t filled = BLOCK_COUNT(shape, rarity);
 
-#line 731
+#line 737
     if (filled == 0)
         NOPE("xahaucards: that set has no cards of a rarity it can roll — re-run load-cards.");
 
     uint32_t subject = start + ((((uint32_t)roll[1] << 8) | (uint32_t)roll[2]) % filled);
 
-#line 744
+#line 750
     if (subject > MAX_SUBJECT)
         NOPE("xahaucards: that set's block record runs past subject 999 — re-run load-cards.");
 
@@ -358,7 +358,7 @@ hook(uint32_t reserved)
     uint8_t counter[4];
     UINT32_TO_BUF(counter, edition);
 
-#line 831
+#line 837
     if (state_set(SBUF(counter), card + URI_CODE_AT, CODE_LEN) < 0)
         NOPE("xahaucards: could not record the edition number.");
 
@@ -366,7 +366,7 @@ hook(uint32_t reserved)
     uint32_t left = edition;
     uint8_t count = 0;
 
-#line 839
+#line 845
     do {
         digits[count++] = '0' + (uint8_t)(left % 10U);
         left /= 10U;
@@ -388,11 +388,15 @@ hook(uint32_t reserved)
     uint8_t row[128];
     int64_t row_len = state_foreign(SBUF(row), SBUF(tkey), SBUF(NS_TABLE), SBUF(issuer_acc));
 
-#line 871
+#line 877
     if (row_len != (int64_t)ROW_LEN)
         NOPE("xahaucards: subject not in the table — load the card table first.");
 
     int name_len = row[0];
+
+#line 895
+    if (name_len < 1 || name_len > NAME_WIDTH)
+        NOPE("xahaucards: a subject row's name length is outside its field — re-run load-cards.");
 
     uint8_t fkey[FKEY_LEN];
     fkey[0] = 'F';
@@ -416,9 +420,17 @@ hook(uint32_t reserved)
     uint8_t rarity_name[32];
     int64_t rarity_len = state_foreign(SBUF(rarity_name), SBUF(rkey), SBUF(NS_TABLE), SBUF(issuer_acc));
 
-#line 902
+#line 924
     if (theme_name_len < 1 || faction_len < 1 || rarity_len < 1)
         NOPE("xahaucards: theme, faction or rarity missing — load the card table first.");
+
+#line 932
+    if (theme_name_len != (int64_t)LABEL_LEN || faction_len != (int64_t)LABEL_LEN
+        || rarity_len != (int64_t)LABEL_LEN
+        || theme_name[0] < 1 || theme_name[0] > LABEL_WIDTH
+        || faction_name[0] < 1 || faction_name[0] > LABEL_WIDTH
+        || rarity_name[0] < 1 || rarity_name[0] > LABEL_WIDTH)
+        NOPE("xahaucards: a theme, faction or rarity record is not the shape the table defines — re-run load-cards.");
 
     int m = 0;
 
@@ -472,7 +484,7 @@ hook(uint32_t reserved)
     BLIT20(preimage + 2, issuer_acc);
     BLIT64(preimage + 22, card);
 
-#line 982
+#line 1016
     if (util_sha512h(R_OBJECT_OUT, 32, preimage, 22 + (uint32_t)uri_len) != 32)
         NOPE("xahaucards: could not derive the object id.");
 
@@ -584,7 +596,7 @@ hook(uint32_t reserved)
 
     rtxn[r++] = 0xF1U;
 
-#line 1128
+#line 1162
     if (etxn_details(R_EMIT_OUT, EMIT_DETAILS_LEN) != EMIT_DETAILS_LEN)
         NOPE("xahaucards: unexpected emit details length.");
 
@@ -619,7 +631,7 @@ hook(uint32_t reserved)
 
     uint32_t t_len = T_URI_AT + (uint32_t)uri_len + 1U;
 
-#line 1170
+#line 1204
     if (etxn_details(T_EMIT_OUT, EMIT_DETAILS_LEN) != EMIT_DETAILS_LEN)
         NOPE("xahaucards: unexpected emit details length.");
 
@@ -651,6 +663,6 @@ hook(uint32_t reserved)
 
     state_set(SBUF(total), SBUF(KEY_MINTCOUNT));
 
-#line 1234
+#line 1268
     DONE("xahaucards: pack minted.");
 }

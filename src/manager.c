@@ -5,6 +5,14 @@
 
 #define ADMIN_DELETE 0
 
+#define IS_DIGIT(c) ((c) >= '0' && (c) <= '9')
+#define DIGITS2(p) (IS_DIGIT((p)[0]) && IS_DIGIT((p)[1]))
+#define DIGITS3(p) (DIGITS2(p) && IS_DIGIT((p)[2]))
+
+#define BLOCK_OK(shape, r) \
+    (BLOCK_COUNT((shape), (r)) >= 1U \
+     && BLOCK_START((shape), (r)) + BLOCK_COUNT((shape), (r)) - 1U <= MAX_SUBJECT)
+
 static int64_t
 admin(void)
 {
@@ -14,11 +22,11 @@ admin(void)
     uint8_t sender[20];
     otxn_field(SBUF(sender), sfAccount);
 
-#line 97
+#line 125
     if (!BUFFER_EQUAL_20(hook_acc, sender))
         NOPE("xahaucards: an Invoke here must carry ATTEST, or be signed by the issuer.");
 
-#line 102
+#line 130
     uint8_t selector[1];
     if (otxn_param(SBUF(selector), "NS", 2) != 1)
         NOPE("xahaucards: admin invoke needs an NS parameter of E, T, S or A.");
@@ -52,7 +60,7 @@ admin(void)
         if (klen == DOESNT_EXIST)
             continue;
 
-#line 141
+#line 169
         if (klen < 1)
             NOPE("xahaucards: admin invoke has a key longer than 32 bytes.");
 
@@ -62,11 +70,41 @@ admin(void)
         if (vlen < 1)
             NOPE("xahaucards: admin invoke has a key with no value.");
 
-        int64_t result = (vlen == 1 && value[0] == ADMIN_DELETE)
+        int64_t erase = vlen == 1 && value[0] == ADMIN_DELETE;
+
+        if (selector[0] == 'T' && !erase)
+        {
+            int64_t ok = 0;
+
+            if (key[0] == 'S' && klen == (int64_t)TKEY_SUBJECT_LEN)
+                ok = vlen == (int64_t)ROW_LEN
+                    && value[0] >= 1 && value[0] <= NAME_WIDTH
+                    && DIGITS2(key + 1) && DIGITS3(key + 3);
+            else if ((key[0] == 'T' && klen == (int64_t)TKEY_THEME_LEN)
+                  || (key[0] == 'F' && klen == (int64_t)FKEY_LEN))
+                ok = vlen == (int64_t)LABEL_LEN
+                    && value[0] >= 1 && value[0] <= LABEL_WIDTH
+                    && DIGITS2(key + 1);
+            else if (key[0] == 'R' && klen == (int64_t)RKEY_LEN)
+                ok = vlen == (int64_t)LABEL_LEN
+                    && value[0] >= 1 && value[0] <= LABEL_WIDTH;
+            else if (key[0] == 'D' && klen == (int64_t)TKEY_THEME_LEN)
+                ok = vlen == (int64_t)SHAPE_LEN && DIGITS2(key + 1)
+                    && BLOCK_OK(value, 0) && BLOCK_OK(value, 1) && BLOCK_OK(value, 2)
+                    && BLOCK_OK(value, 3) && BLOCK_OK(value, 4);
+            else if (key[0] == SALE_KEY_KIND && klen == (int64_t)TKEY_THEME_LEN)
+                ok = vlen == 1 && value[0] == SALE_OPEN && DIGITS2(key + 1);
+
+#line 229
+            if (!ok)
+                NOPE("xahaucards: that table record is not a shape mint.c can read — see the card table in namespaces.h.");
+        }
+
+        int64_t result = erase
             ? state_foreign_set(0, 0, key, klen, ns, ns ? 32 : 0, hook_acc, ns ? 20 : 0)
             : state_foreign_set(value, vlen, key, klen, ns, ns ? 32 : 0, hook_acc, ns ? 20 : 0);
 
-#line 157
+#line 240
         if (result < 0)
             NOPE("xahaucards: could not write the entry.");
 
@@ -204,24 +242,24 @@ attest(const uint8_t *tokenid)
         SBUF(roll), sender, ATTEST_KEY_LEN,
         SBUF(NS_ATTEST), SBUF(hook_acc));
 
-#line 495
+#line 578
     if (rlen < (int64_t)ATTEST_SLOT_DIGITS + 1)
         NOPE("xahaucards: this account is not on the attestor roll.");
 
     uint8_t slot_hi = roll[0];
     uint8_t slot_lo = roll[1];
 
-#line 505
+#line 588
     if (slot_hi < '0' || slot_hi > '9' || slot_lo < '0' || slot_lo > '9')
         NOPE("xahaucards: the roll entry for this account has no slot digits.");
 
     uint8_t keylet[34];
 
-#line 512
+#line 595
     if (util_keylet(SBUF(keylet), KEYLET_UNCHECKED, (uint32_t)tokenid, 32, 0, 0, 0, 0) != 34)
         NOPE("xahaucards: could not derive the token keylet.");
 
-#line 518
+#line 601
     if (slot_set(SBUF(keylet), 1) != 1)
         NOPE("xahaucards: no such URIToken — check the id, or it has been burned.");
 
@@ -236,7 +274,7 @@ attest(const uint8_t *tokenid)
     if (slot(SBUF(issuer), 3) != 20)
         NOPE("xahaucards: could not read the token issuer.");
 
-#line 534
+#line 617
     if (!BUFFER_EQUAL_20(issuer, hook_acc))
         NOPE("xahaucards: that card was not issued here.");
 
@@ -244,7 +282,7 @@ attest(const uint8_t *tokenid)
     {
         int64_t count = slot_count(4);
 
-#line 562
+#line 645
         if (count >= (int64_t)REMARKS_PER_OBJECT)
             NOPE("xahaucards: this card carries no room for another signature.");
 
@@ -261,7 +299,7 @@ attest(const uint8_t *tokenid)
             if (slot(SBUF(name), 6) != (int64_t)ATTEST_NAME_LEN + NAME_VL)
                 continue;
 
-#line 608
+#line 691
             if (name[NAME_VL + 0] == 'C' && name[NAME_VL + 1] == 'a'
                 && name[NAME_VL + 2] == 'r' && name[NAME_VL + 3] == 'd'
                 && name[NAME_VL + 4] == 'S' && name[NAME_VL + 5] == 'i'
@@ -273,7 +311,7 @@ attest(const uint8_t *tokenid)
         }
     }
 
-#line 621
+#line 704
     if (etxn_reserve(1) != 1)
         NOPE("xahaucards: could not reserve the emission.");
 
@@ -293,7 +331,7 @@ attest(const uint8_t *tokenid)
 
     uint8_t txid[32];
 
-#line 646
+#line 729
     if (otxn_id(SBUF(txid), 0) != 32)
         NOPE("xahaucards: could not read this transaction's id.");
 
@@ -305,7 +343,7 @@ attest(const uint8_t *tokenid)
     uint8_t raddr[64];
     int64_t raddr_len = util_raddr(SBUF(raddr), sender, 20);
 
-#line 665
+#line 748
     if (raddr_len < 1 || raddr_len > (int64_t)RADDR_MAX)
         NOPE("xahaucards: could not render the signer's address.");
 
@@ -316,7 +354,7 @@ attest(const uint8_t *tokenid)
 
     PUT(J_TX);
 
-#line 678
+#line 761
     for (int i = 0; GUARD(32), i < 32; ++i)
     {
         rtxn[r++] = HEX_NIBBLE(txid[i] >> 4);
@@ -327,7 +365,7 @@ attest(const uint8_t *tokenid)
 
     int value_len = r - value_from;
 
-#line 692
+#line 775
     if (value_len < 1 || value_len > 192)
         NOPE("xahaucards: the signature value came out the wrong length.");
 
@@ -344,7 +382,7 @@ attest(const uint8_t *tokenid)
     int64_t domain_len = state_foreign(
         SBUF(domain), SBUF(KEY_DOMAIN), SBUF(NS_SETTINGS), SBUF(hook_acc));
 
-#line 726
+#line 809
     if (domain_len < 1 || domain_len > (int64_t)DOMAIN_MAX)
         NOPE("xahaucards: the card domain is not configured — load the settings first.");
 
@@ -353,9 +391,21 @@ attest(const uint8_t *tokenid)
 
     uint8_t uri[64];
 
-#line 737
-    if (slot(SBUF(uri), 7) < (int64_t)NAME_VL + URI_CODE_AT + URI_CODE_LEN)
-        NOPE("xahaucards: that URIToken's URI is too short to hold a card code.");
+    int64_t uri_len = slot(SBUF(uri), 7);
+
+#line 848
+    if (uri_len < (int64_t)NAME_VL + URI_MIN_LEN
+        || uri[NAME_VL + 0] != 'x' || uri[NAME_VL + 1] != 'a' || uri[NAME_VL + 2] != 'h'
+        || uri[NAME_VL + 3] != 'a' || uri[NAME_VL + 4] != 'u' || uri[NAME_VL + 5] != 'c'
+        || uri[NAME_VL + 6] != 'a' || uri[NAME_VL + 7] != 'r' || uri[NAME_VL + 8] != 'd'
+        || uri[NAME_VL + 9] != 's' || uri[NAME_VL + 10] != ':' || uri[NAME_VL + 11] != '/'
+        || uri[NAME_VL + 12] != '/'
+        || uri[NAME_VL + URI_CODE_AT + 0] != 'X' || uri[NAME_VL + URI_CODE_AT + 1] != 'C'
+        || uri[NAME_VL + URI_CODE_AT + 2] != '-' || uri[NAME_VL + URI_CODE_AT + 5] != '-'
+        || uri[NAME_VL + URI_CODE_AT + 9] != '-' || uri[NAME_VL + URI_CODE_AT + 11] != '-'
+        || uri[NAME_VL + URI_CODE_AT + 14] != '-'
+        || uri[NAME_VL + URI_CODE_AT + URI_CODE_LEN] != '-')
+        NOPE("xahaucards: that URIToken is not a XahauCards card — its URI does not carry a card code.");
 
     rtxn[r++] = 0xE0U; rtxn[r++] = 0x61U;
     rtxn[r++] = 0x22U;
@@ -384,7 +434,7 @@ attest(const uint8_t *tokenid)
 
     int image_len = r - image_from;
 
-#line 786
+#line 907
     if (image_len < 1 || image_len > 192)
         NOPE("xahaucards: the image value came out the wrong length.");
 
@@ -418,7 +468,7 @@ attest(const uint8_t *tokenid)
 
     uint8_t emit_hash[32];
 
-#line 826
+#line 947
     if (emit(SBUF(emit_hash), rtxn, r) < 0)
         NOPE("xahaucards: could not emit the signature.");
 
@@ -431,7 +481,7 @@ attest(const uint8_t *tokenid)
     BLIT64(said + m, raddr);
     m += (int)raddr_len;
 
-#line 846
+#line 967
     return accept(said, (uint32_t)m, __LINE__);
 }
 
@@ -440,14 +490,14 @@ hook(uint32_t reserved)
 {
     _g(1, 1);
 
-#line 863
+#line 984
     if (otxn_type() != ttINVOKE)
         DONE("xahaucards-manager: not an Invoke, passing.");
 
     uint8_t tokenid[64];
     int64_t idlen = otxn_param(SBUF(tokenid), "ATTEST", 6);
 
-#line 892
+#line 1013
     if (idlen != 32 && idlen != DOESNT_EXIST)
         NOPE("xahaucards: ATTEST must be a 32 byte URIToken id.");
 

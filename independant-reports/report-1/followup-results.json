@@ -1,0 +1,237 @@
+{
+  "addresses": {
+    "shop": "rfttwgbFPKLSuD2yf2NGTk4qhnZMozGCbp",
+    "issuer": "rss6oKBRfJAyJFHQYG7VPfAtuam9cbbpWn",
+    "buyer": "refuGbntXXeBMGJ7Eym9p1hb2pLWVqBBP",
+    "claim": "rn6ybgQjNsBkb2SU9vydYhQgiATPNr1RXd",
+    "attestor": "rErfEEqJph8VQMJAF3gw7PPsfx9452RK3v",
+    "outsider": "rpPEyJYwqvfCXDYJH2RDsuj4eixe5nS6BY",
+    "blocker": "rBnvCdpT7FHHCZj7Pm7idNgUtdRzvc6W9K",
+    "ghost": "r4t5kTe2YNNeX8aDNCLzWpAt8mX4k7GApb"
+  },
+  "findings": [
+    {
+      "severity": "HIGH",
+      "title": "Exact pack price buy failed after restoring 8-byte PRICE",
+      "detail": "{\"id\":\"buy exact 0.1 XAH\",\"role\":\"buyer\",\"engine\":\"tesSUCCESS\",\"hash\":\"9053E366CAF80D441A3D4F3F6D6B7B4F6AF3DC39475B154B98D408B836138245\",\"explorer\":\"https://test.xahauexplorer.com/explorer/9053E366CAF80D441A3D4F3F6D6B7B4F6AF3DC39475B154B98D408B836138245\",\"hooks\":[]}"
+    }
+  ],
+  "tests": [
+    {
+      "id": "restore 8-byte economics",
+      "role": "issuer",
+      "engine": "tesSUCCESS",
+      "hash": "D7D343558DD9C7001027F980CCA928406275C969473304AB4AD4B148DFDE5738",
+      "explorer": "https://test.xahauexplorer.com/explorer/D7D343558DD9C7001027F980CCA928406275C969473304AB4AD4B148DFDE5738",
+      "hooks": []
+    },
+    {
+      "id": "buy exact 0.1 XAH",
+      "role": "buyer",
+      "engine": "tesSUCCESS",
+      "hash": "9053E366CAF80D441A3D4F3F6D6B7B4F6AF3DC39475B154B98D408B836138245",
+      "explorer": "https://test.xahauexplorer.com/explorer/9053E366CAF80D441A3D4F3F6D6B7B4F6AF3DC39475B154B98D408B836138245",
+      "hooks": []
+    },
+    {
+      "id": "wrong amount",
+      "role": "buyer",
+      "engine": "tecHOOK_REJECTED",
+      "hash": "33A968BB144A62EB0EAB2E8FACEEE69E27AE4397CAA9FAD66C0A0BCF9F9EE8D1",
+      "explorer": "https://test.xahauexplorer.com/explorer/33A968BB144A62EB0EAB2E8FACEEE69E27AE4397CAA9FAD66C0A0BCF9F9EE8D1",
+      "hooks": []
+    },
+    {
+      "id": "exact price no THEME",
+      "role": "buyer",
+      "engine": "tecHOOK_REJECTED",
+      "hash": "89F3F009E1C2F83133FE87270BE4D279E2696EEF57FE7F6AEA30DC4904EEDE20",
+      "explorer": "https://test.xahauexplorer.com/explorer/89F3F009E1C2F83133FE87270BE4D279E2696EEF57FE7F6AEA30DC4904EEDE20",
+      "hooks": []
+    },
+    {
+      "id": "THEME 99",
+      "role": "buyer",
+      "engine": "tecHOOK_REJECTED",
+      "hash": "C8FAC3BBF09A6FF3408B6B52486AD76A209AD1F3709C7BE150BF89C3FEBDDB6D",
+      "explorer": "https://test.xahauexplorer.com/explorer/C8FAC3BBF09A6FF3408B6B52486AD76A209AD1F3709C7BE150BF89C3FEBDDB6D",
+      "hooks": []
+    },
+    {
+      "id": "closed THEME 03",
+      "role": "buyer",
+      "engine": "tecHOOK_REJECTED",
+      "hash": "D0352E64ED43B3CF58E9049282FB19EF1D92E497C49AFF763B6B68BA426EBFDA",
+      "explorer": "https://test.xahauexplorer.com/explorer/D0352E64ED43B3CF58E9049282FB19EF1D92E497C49AFF763B6B68BA426EBFDA",
+      "hooks": []
+    },
+    {
+      "id": "partial flag",
+      "role": "buyer",
+      "engine": "temBAD_SEND_NATIVE_MAX",
+      "hash": "889BF904737B5DA322160E709304A50E0CDE918265717E8B09A07E83C74CDD4B",
+      "explorer": "https://test.xahauexplorer.com/explorer/889BF904737B5DA322160E709304A50E0CDE918265717E8B09A07E83C74CDD4B",
+      "hooks": []
+    },
+    {
+      "id": "outsider DisallowIncomingRemit",
+      "role": "outsider",
+      "engine": "tesSUCCESS",
+      "hash": "034730263F18A00F2B3D050101F4E0DF9393EBC814BF11CC70D78F28D80FB088",
+      "explorer": "https://test.xahauexplorer.com/explorer/034730263F18A00F2B3D050101F4E0DF9393EBC814BF11CC70D78F28D80FB088",
+      "hooks": []
+    },
+    {
+      "id": "buy with DisallowIncomingRemit",
+      "role": "outsider",
+      "engine": "tecHOOK_REJECTED",
+      "hash": "B9C40818B09852F6AC26EDA794BE249048074A8D14163B4F5F33F66E13301D44",
+      "explorer": "https://test.xahauexplorer.com/explorer/B9C40818B09852F6AC26EDA794BE249048074A8D14163B4F5F33F66E13301D44",
+      "hooks": []
+    },
+    {
+      "id": "attestor DepositAuth",
+      "role": "attestor",
+      "engine": "tesSUCCESS",
+      "hash": "F8566727EAB7E29F5825FD607414E822641378F611D4D8CC22344441AAFFAB41",
+      "explorer": "https://test.xahauexplorer.com/explorer/F8566727EAB7E29F5825FD607414E822641378F611D4D8CC22344441AAFFAB41",
+      "hooks": []
+    },
+    {
+      "id": "buy with DepositAuth",
+      "role": "attestor",
+      "engine": "tecHOOK_REJECTED",
+      "hash": "7DC04E976ED8EB58351A2FA8F8FA7BFABD0E2E165EF9873C33EEF9384187E484",
+      "explorer": "https://test.xahauexplorer.com/explorer/7DC04E976ED8EB58351A2FA8F8FA7BFABD0E2E165EF9873C33EEF9384187E484",
+      "hooks": []
+    },
+    {
+      "id": "ALLOW 2",
+      "role": "shop",
+      "engine": "tesSUCCESS",
+      "hash": "78D1C0FEB9FDAC50766484E6D08ABCFB2DAB1646195D9E3ED9BFA388AC9DF543",
+      "explorer": "https://test.xahauexplorer.com/explorer/78D1C0FEB9FDAC50766484E6D08ABCFB2DAB1646195D9E3ED9BFA388AC9DF543",
+      "hooks": []
+    },
+    {
+      "id": "GRANT 1/5",
+      "role": "claim",
+      "engine": "tesSUCCESS",
+      "hash": "8E0E02582D0A8685972D2E3CBB6F13CDE1D672D64EE246056178F1D1BB073195",
+      "explorer": "https://test.xahauexplorer.com/explorer/8E0E02582D0A8685972D2E3CBB6F13CDE1D672D64EE246056178F1D1BB073195",
+      "hooks": []
+    },
+    {
+      "id": "GRANT 2/5",
+      "role": "claim",
+      "engine": "tesSUCCESS",
+      "hash": "2B6C384DEC26107EDE7E06217A4F81C8EF97ED622A8B7E68061270C651DA2DBA",
+      "explorer": "https://test.xahauexplorer.com/explorer/2B6C384DEC26107EDE7E06217A4F81C8EF97ED622A8B7E68061270C651DA2DBA",
+      "hooks": []
+    },
+    {
+      "id": "GRANT 3/5",
+      "role": "claim",
+      "engine": "tecHOOK_REJECTED",
+      "hash": "DF3F7B660A02BC60359202D15D413C9F7090348580C1598F2DA83E46AF3877FD",
+      "explorer": "https://test.xahauexplorer.com/explorer/DF3F7B660A02BC60359202D15D413C9F7090348580C1598F2DA83E46AF3877FD",
+      "hooks": []
+    },
+    {
+      "id": "GRANT 4/5",
+      "role": "claim",
+      "engine": "tecHOOK_REJECTED",
+      "hash": "4BECF6D3A31852E218C1D6B1AE6FAB541691153755C7484737765BFB79EC1BEB",
+      "explorer": "https://test.xahauexplorer.com/explorer/4BECF6D3A31852E218C1D6B1AE6FAB541691153755C7484737765BFB79EC1BEB",
+      "hooks": []
+    },
+    {
+      "id": "GRANT 5/5",
+      "role": "claim",
+      "engine": "tecHOOK_REJECTED",
+      "hash": "FAC7EA9CA4AA0C58BA75D7926BBD6D91EB37D96BDC3A1C5C250A2F44FBB51486",
+      "explorer": "https://test.xahauexplorer.com/explorer/FAC7EA9CA4AA0C58BA75D7926BBD6D91EB37D96BDC3A1C5C250A2F44FBB51486",
+      "hooks": []
+    },
+    {
+      "id": "GRANT to unfunded ghost",
+      "role": "claim",
+      "engine": "tecHOOK_REJECTED",
+      "hash": "24B5EF38376006464F20F2AEB77A09A3DCDC6103047AE870AF67FF36C30E5B02",
+      "explorer": "https://test.xahauexplorer.com/explorer/24B5EF38376006464F20F2AEB77A09A3DCDC6103047AE870AF67FF36C30E5B02",
+      "hooks": []
+    },
+    {
+      "id": "buy overflow theme 02",
+      "role": "buyer",
+      "engine": "tesSUCCESS",
+      "hash": "5B71F95AB5A4D2BBE76C9C654D75CFFD48E0FB26D7714FB3BCA276AE3A722112",
+      "explorer": "https://test.xahauexplorer.com/explorer/5B71F95AB5A4D2BBE76C9C654D75CFFD48E0FB26D7714FB3BCA276AE3A722112",
+      "hooks": []
+    },
+    {
+      "id": "extra pack 1/3",
+      "role": "buyer",
+      "engine": "tesSUCCESS",
+      "hash": "5DA839CA74FD53AEAE7DAE7D74605CD6FE6AE512BD34698395A38BDD714BB9A5",
+      "explorer": "https://test.xahauexplorer.com/explorer/5DA839CA74FD53AEAE7DAE7D74605CD6FE6AE512BD34698395A38BDD714BB9A5",
+      "hooks": []
+    },
+    {
+      "id": "extra pack 2/3",
+      "role": "buyer",
+      "engine": "tesSUCCESS",
+      "hash": "F7062800E7AC61A6271A29802FFF5486F53C19E9F839B749B2C030ED37B8FCAA",
+      "explorer": "https://test.xahauexplorer.com/explorer/F7062800E7AC61A6271A29802FFF5486F53C19E9F839B749B2C030ED37B8FCAA",
+      "hooks": []
+    },
+    {
+      "id": "extra pack 3/3",
+      "role": "buyer",
+      "engine": "tesSUCCESS",
+      "hash": "9433F3AAABCEA69A6E8338FD7827FB9EFBBE67872E581168897A3B513209EE55",
+      "explorer": "https://test.xahauexplorer.com/explorer/9433F3AAABCEA69A6E8338FD7827FB9EFBBE67872E581168897A3B513209EE55",
+      "hooks": []
+    },
+    {
+      "id": "ATTEST first card",
+      "role": "attestor",
+      "engine": "tecHOOK_REJECTED",
+      "hash": "0A49E50376466D10F4EAC69838FB10DD43ED894DDB8F064B6B504E88F6054AEE",
+      "explorer": "https://test.xahauexplorer.com/explorer/0A49E50376466D10F4EAC69838FB10DD43ED894DDB8F064B6B504E88F6054AEE",
+      "hooks": []
+    },
+    {
+      "id": "ATTEST same card again",
+      "role": "attestor",
+      "engine": "tecHOOK_REJECTED",
+      "hash": "85E072843E03159179F5EC44DE34CAB5801C1A45FC3235D5006F9A8225F3B9DE",
+      "explorer": "https://test.xahauexplorer.com/explorer/85E072843E03159179F5EC44DE34CAB5801C1A45FC3235D5006F9A8225F3B9DE",
+      "hooks": []
+    },
+    {
+      "id": "mint non-card URIToken",
+      "role": "issuer",
+      "engine": "tecDUPLICATE",
+      "hash": "CF0C2E45486A2E1F7DC9F875754FC79988BE8D234A94A319E255B4BB2CB3673E",
+      "explorer": "https://test.xahauexplorer.com/explorer/CF0C2E45486A2E1F7DC9F875754FC79988BE8D234A94A319E255B4BB2CB3673E",
+      "hooks": []
+    },
+    {
+      "id": "ATTEST non-card URIToken",
+      "role": "attestor",
+      "engine": "tecHOOK_REJECTED",
+      "hash": "48BFCD0781336708A9915AA6AD4F84AFD199D7E672C2FBDBCA52BE6C9128C6D4",
+      "explorer": "https://test.xahauexplorer.com/explorer/48BFCD0781336708A9915AA6AD4F84AFD199D7E672C2FBDBCA52BE6C9128C6D4",
+      "hooks": []
+    },
+    {
+      "id": "1-drop shop->issuer (not emitted)",
+      "role": "shop",
+      "engine": "tesSUCCESS",
+      "hash": "ECD6479CCDAA6B5D2375C98A9F0B0CA0CB785299B99643374B0E5D3BE052FD36",
+      "explorer": "https://test.xahauexplorer.com/explorer/ECD6479CCDAA6B5D2375C98A9F0B0CA0CB785299B99643374B0E5D3BE052FD36",
+      "hooks": []
+    }
+  ]
+}

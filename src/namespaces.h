@@ -83,6 +83,9 @@ static const uint8_t KEY_MINTCOUNT[9] = {'M', 'I', 'N', 'T', 'C', 'O', 'U', 'N',
 #define ROW_FACTION_AT (1U + NAME_WIDTH)
 #define ROW_LEN (ROW_FACTION_AT + 4U)
 
+#define LABEL_WIDTH 12
+#define LABEL_LEN (1U + LABEL_WIDTH)
+
 #define SHAPE_LEN 20U
 #define BLOCK_LEN 4U
 
@@ -97,6 +100,8 @@ static const uint8_t KEY_MINTCOUNT[9] = {'M', 'I', 'N', 'T', 'C', 'O', 'U', 'N',
 #define TKEY_THEME_LEN 3U
 #define TKEY_SUBJECT_LEN 6U
 #define FKEY_LEN 7U
+
+#define RKEY_LEN 2U
 
 #define SALE_KEY_KIND 'O'
 
@@ -113,6 +118,8 @@ static const uint8_t KEY_MINTCOUNT[9] = {'M', 'I', 'N', 'T', 'C', 'O', 'U', 'N',
 
 #define URI_CODE_AT 13
 #define URI_CODE_LEN 17
+
+#define URI_MIN_LEN (URI_CODE_AT + URI_CODE_LEN + 2)
 
 static const uint8_t J_IMAGE[] = "\"image\":\"https://";
 static const uint8_t J_CARD[] = "/card/";
