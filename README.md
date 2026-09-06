@@ -1,4 +1,4 @@
-# XahauCards — the hooks
+# XahauCards Hooks
 
 The four hooks that sell and mint XahauCards, exactly as deployed, with the
 container and the script that build them.

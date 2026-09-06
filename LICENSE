@@ -1,0 +1,37 @@
+Copyright (c) 2026 XahauCards. All rights reserved.
+
+This repository is published so that the hooks running on the XahauCards
+accounts can be read and verified by anybody. It is source-available, not open
+source.
+
+WHAT YOU MAY DO
+
+You may read this source. You may compile and run it for the purpose of
+verifying that it produces the bytecode deployed on the Xahau ledger, and for
+study, review and security research. You may quote from it when discussing or
+reporting on it.
+
+WHAT REQUIRES PERMISSION
+
+Any other use — copying, modifying, merging, publishing, distributing,
+sublicensing or selling this source, or works derived from it, in whole or in
+part — requires prior written permission from the copyright holder.
+
+THE HOOK API HEADERS ARE NOT COVERED BY THIS NOTICE
+
+Everything under include/ is the Xahau Hook API. It is somebody else's work,
+copied here unmodified because the sources will not compile without it, and it
+remains under its own licence and the copyright of its own authors. Nothing in
+this notice claims any right over it or grants you any right to it.
+
+NO WARRANTY
+
+This software is provided "as is", without warranty of any kind, express or
+implied, including but not limited to the warranties of merchantability,
+fitness for a particular purpose and noninfringement. In no event shall the
+copyright holder be liable for any claim, damages or other liability, whether
+in an action of contract, tort or otherwise, arising from, out of or in
+connection with this software or its use.
+
+Nothing here is a warranty about the deployed hooks, the cards they mint, or
+anything bought with them.
