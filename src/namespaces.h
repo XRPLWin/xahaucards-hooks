@@ -116,6 +116,9 @@ static const uint8_t KEY_MINTCOUNT[9] = {'M', 'I', 'N', 'T', 'C', 'O', 'U', 'N',
 
 #define ATTEST_SLOT_MAX 99U
 
+#define SIGS_KEY_LEN 6U
+#define SIGS_LEN 4U
+
 #define URI_CODE_AT 13
 #define URI_CODE_LEN 17
 
@@ -123,7 +126,7 @@ static const uint8_t KEY_MINTCOUNT[9] = {'M', 'I', 'N', 'T', 'C', 'O', 'U', 'N',
 
 static const uint8_t J_IMAGE[] = "\"image\":\"https://";
 static const uint8_t J_CARD[] = "/card/";
-static const uint8_t J_IMG_END[] = ".avif\",";
+static const uint8_t J_IMG_END[] = ".webp\",";
 
 #define IMAGE_SLOT_LEN 3U
 

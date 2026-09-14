@@ -126,13 +126,13 @@ Worst-case guard counts, before and after, as `build.sh` reports them:
 | shop | 149 / 650 | 149 / 644 |
 | doors | 149 / 812 | 149 / 812 |
 | mint | 28997 | 29555 |
-| manager | 22741 | 30714 |
+| manager | 22741 | 30811 |
 
 The shop got marginally cheaper for buyers. The mint's increase lands on the
 shop's trigger fee, well under a thousand drops a pack. The manager's increase
 is the table validation, multiplied by the seven records an admin batch can
-carry, and is paid by the issuer on a table load and by an attestor on a
-signature. All four remain well inside the 65535 ceiling.
+carry, plus the per-slot signature allowance added in the same build, and is
+paid by the issuer on a table load and by an attestor on a signature. All four remain well inside the 65535 ceiling.
 
 ## Verification
 

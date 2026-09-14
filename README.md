@@ -33,7 +33,7 @@ mainnet, and on testnet where the same build is installed first.
 | `shop.wasm` | 9d38306572c08dcf0e95ea969cffd2989e37169414028e88427820a6b5556917 | [C650B566C37E06ECFB005B6037EA04348FF360FAB166FCBBA673CBCADBE3FBFE](https://xahau.xrplwin.com/hook/C650B566C37E06ECFB005B6037EA04348FF360FAB166FCBBA673CBCADBE3FBFE) · [testnet](https://xahau-testnet.xrplwin.com/hook/C650B566C37E06ECFB005B6037EA04348FF360FAB166FCBBA673CBCADBE3FBFE) |
 | `doors.wasm` | 40d04eafa7c8aa3d8ae54dd7c4006c8a5008d8413e9f5a3336ea424592343503 | [C16AC4E5A655D7FB32C8E3070036EE2D6DBAEA6A6F84DA1B15DD8140F5D8647D](https://xahau.xrplwin.com/hook/C16AC4E5A655D7FB32C8E3070036EE2D6DBAEA6A6F84DA1B15DD8140F5D8647D) · [testnet](https://xahau-testnet.xrplwin.com/hook/C16AC4E5A655D7FB32C8E3070036EE2D6DBAEA6A6F84DA1B15DD8140F5D8647D) |
 | `mint.wasm` | 832ea89bdc10b152cdc525304496f199c4cb7d25c9ca4628e59caad4c3900ca5 | [E1055384729A5D3E7BF44F39A2DA2F213A2E7D6B888BB0DD2D3B5A9608FD7979](https://xahau.xrplwin.com/hook/E1055384729A5D3E7BF44F39A2DA2F213A2E7D6B888BB0DD2D3B5A9608FD7979) · [testnet](https://xahau-testnet.xrplwin.com/hook/E1055384729A5D3E7BF44F39A2DA2F213A2E7D6B888BB0DD2D3B5A9608FD7979) |
-| `manager.wasm` | d93905c5d31893c8277e9cbe6794a31aac174e9f2c8ef682146c0d5812cc4b9b | [3B1A785C9C14C16D2A807330079EF60F6DEA08146D80BC139DBE5A6812387696](https://xahau.xrplwin.com/hook/3B1A785C9C14C16D2A807330079EF60F6DEA08146D80BC139DBE5A6812387696) · [testnet](https://xahau-testnet.xrplwin.com/hook/3B1A785C9C14C16D2A807330079EF60F6DEA08146D80BC139DBE5A6812387696) |
+| `manager.wasm` | c30d671f6927243c9d6ca76ae5113f1e07abc7fe09b4a6512d4efe845483e4ac | [E8655E53A5DD40D6783392F01C46171BC1D0FFFD3C48227C1F13F34288FB6EDC](https://xahau.xrplwin.com/hook/E8655E53A5DD40D6783392F01C46171BC1D0FFFD3C48227C1F13F34288FB6EDC) · [testnet](https://xahau-testnet.xrplwin.com/hook/E8655E53A5DD40D6783392F01C46171BC1D0FFFD3C48227C1F13F34288FB6EDC) |
 
 `build/SOURCES.sha256` carries the SHA-256 digests alongside the sources they
 were built from.
@@ -88,4 +88,5 @@ delivered, with a response beside each saying what changed because of it.
 | report | response |
 | --- | --- |
 | [report-1](independent-reports/report-1/hook-audit.md) — live testnet audit, September 2026 | [report-1-response.md](independent-reports/report-1-response.md) |
+| [report-2](independent-reports/report-2/REPORT.md) — hook review by Kairo Vault Technologies, September 2026 | [report-2-response.md](independent-reports/report-2-response.md) |
 

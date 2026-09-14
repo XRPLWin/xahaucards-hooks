@@ -100,11 +100,18 @@ admin(void)
                 NOPE("xahaucards: that table record is not a shape mint.c can read — see the card table in namespaces.h.");
         }
 
-        int64_t result = erase
-            ? state_foreign_set(0, 0, key, klen, ns, ns ? 32 : 0, hook_acc, ns ? 20 : 0)
-            : state_foreign_set(value, vlen, key, klen, ns, ns ? 32 : 0, hook_acc, ns ? 20 : 0);
+        int64_t result;
 
-#line 240
+        if (ns == 0)
+            result = erase
+                ? state_set(0, 0, key, klen)
+                : state_set(value, vlen, key, klen);
+        else
+            result = erase
+                ? state_foreign_set(0, 0, key, klen, ns, 32, hook_acc, 20)
+                : state_foreign_set(value, vlen, key, klen, ns, 32, hook_acc, 20);
+
+#line 265
         if (result < 0)
             NOPE("xahaucards: could not write the entry.");
 
@@ -242,24 +249,38 @@ attest(const uint8_t *tokenid)
         SBUF(roll), sender, ATTEST_KEY_LEN,
         SBUF(NS_ATTEST), SBUF(hook_acc));
 
-#line 578
+#line 603
     if (rlen < (int64_t)ATTEST_SLOT_DIGITS + 1)
         NOPE("xahaucards: this account is not on the attestor roll.");
 
     uint8_t slot_hi = roll[0];
     uint8_t slot_lo = roll[1];
 
-#line 588
+#line 613
     if (slot_hi < '0' || slot_hi > '9' || slot_lo < '0' || slot_lo > '9')
         NOPE("xahaucards: the roll entry for this account has no slot digits.");
 
+    uint8_t skey[SIGS_KEY_LEN];
+    skey[0] = 'S'; skey[1] = 'I'; skey[2] = 'G'; skey[3] = 'S';
+    skey[4] = slot_hi;
+    skey[5] = slot_lo;
+
+    int64_t left = state_foreign(0, 0, SBUF(skey), SBUF(NS_ATTEST), SBUF(hook_acc));
+
+#line 638
+    if (left < 0)
+        NOPE("xahaucards: this slot has no signature allowance — load the attestor roll.");
+
+    if (left == 0)
+        NOPE("xahaucards: this slot's signature allowance is used up.");
+
     uint8_t keylet[34];
 
-#line 595
+#line 648
     if (util_keylet(SBUF(keylet), KEYLET_UNCHECKED, (uint32_t)tokenid, 32, 0, 0, 0, 0) != 34)
         NOPE("xahaucards: could not derive the token keylet.");
 
-#line 601
+#line 654
     if (slot_set(SBUF(keylet), 1) != 1)
         NOPE("xahaucards: no such URIToken — check the id, or it has been burned.");
 
@@ -274,7 +295,7 @@ attest(const uint8_t *tokenid)
     if (slot(SBUF(issuer), 3) != 20)
         NOPE("xahaucards: could not read the token issuer.");
 
-#line 617
+#line 670
     if (!BUFFER_EQUAL_20(issuer, hook_acc))
         NOPE("xahaucards: that card was not issued here.");
 
@@ -282,7 +303,7 @@ attest(const uint8_t *tokenid)
     {
         int64_t count = slot_count(4);
 
-#line 645
+#line 698
         if (count >= (int64_t)REMARKS_PER_OBJECT)
             NOPE("xahaucards: this card carries no room for another signature.");
 
@@ -299,7 +320,7 @@ attest(const uint8_t *tokenid)
             if (slot(SBUF(name), 6) != (int64_t)ATTEST_NAME_LEN + NAME_VL)
                 continue;
 
-#line 691
+#line 744
             if (name[NAME_VL + 0] == 'C' && name[NAME_VL + 1] == 'a'
                 && name[NAME_VL + 2] == 'r' && name[NAME_VL + 3] == 'd'
                 && name[NAME_VL + 4] == 'S' && name[NAME_VL + 5] == 'i'
@@ -311,7 +332,14 @@ attest(const uint8_t *tokenid)
         }
     }
 
-#line 704
+    uint8_t remaining[SIGS_LEN];
+    UINT32_TO_BUF(remaining, (uint32_t)left - 1U);
+
+#line 770
+    if (state_foreign_set(SBUF(remaining), SBUF(skey), SBUF(NS_ATTEST), SBUF(hook_acc)) < 0)
+        NOPE("xahaucards: could not spend the signature allowance.");
+
+#line 775
     if (etxn_reserve(1) != 1)
         NOPE("xahaucards: could not reserve the emission.");
 
@@ -331,7 +359,7 @@ attest(const uint8_t *tokenid)
 
     uint8_t txid[32];
 
-#line 729
+#line 800
     if (otxn_id(SBUF(txid), 0) != 32)
         NOPE("xahaucards: could not read this transaction's id.");
 
@@ -343,7 +371,7 @@ attest(const uint8_t *tokenid)
     uint8_t raddr[64];
     int64_t raddr_len = util_raddr(SBUF(raddr), sender, 20);
 
-#line 748
+#line 819
     if (raddr_len < 1 || raddr_len > (int64_t)RADDR_MAX)
         NOPE("xahaucards: could not render the signer's address.");
 
@@ -354,7 +382,7 @@ attest(const uint8_t *tokenid)
 
     PUT(J_TX);
 
-#line 761
+#line 832
     for (int i = 0; GUARD(32), i < 32; ++i)
     {
         rtxn[r++] = HEX_NIBBLE(txid[i] >> 4);
@@ -365,7 +393,7 @@ attest(const uint8_t *tokenid)
 
     int value_len = r - value_from;
 
-#line 775
+#line 846
     if (value_len < 1 || value_len > 192)
         NOPE("xahaucards: the signature value came out the wrong length.");
 
@@ -382,7 +410,7 @@ attest(const uint8_t *tokenid)
     int64_t domain_len = state_foreign(
         SBUF(domain), SBUF(KEY_DOMAIN), SBUF(NS_SETTINGS), SBUF(hook_acc));
 
-#line 809
+#line 880
     if (domain_len < 1 || domain_len > (int64_t)DOMAIN_MAX)
         NOPE("xahaucards: the card domain is not configured — load the settings first.");
 
@@ -393,7 +421,7 @@ attest(const uint8_t *tokenid)
 
     int64_t uri_len = slot(SBUF(uri), 7);
 
-#line 848
+#line 919
     if (uri_len < (int64_t)NAME_VL + URI_MIN_LEN
         || uri[NAME_VL + 0] != 'x' || uri[NAME_VL + 1] != 'a' || uri[NAME_VL + 2] != 'h'
         || uri[NAME_VL + 3] != 'a' || uri[NAME_VL + 4] != 'u' || uri[NAME_VL + 5] != 'c'
@@ -434,7 +462,7 @@ attest(const uint8_t *tokenid)
 
     int image_len = r - image_from;
 
-#line 907
+#line 978
     if (image_len < 1 || image_len > 192)
         NOPE("xahaucards: the image value came out the wrong length.");
 
@@ -468,7 +496,7 @@ attest(const uint8_t *tokenid)
 
     uint8_t emit_hash[32];
 
-#line 947
+#line 1018
     if (emit(SBUF(emit_hash), rtxn, r) < 0)
         NOPE("xahaucards: could not emit the signature.");
 
@@ -481,7 +509,7 @@ attest(const uint8_t *tokenid)
     BLIT64(said + m, raddr);
     m += (int)raddr_len;
 
-#line 967
+#line 1038
     return accept(said, (uint32_t)m, __LINE__);
 }
 
@@ -490,14 +518,14 @@ hook(uint32_t reserved)
 {
     _g(1, 1);
 
-#line 984
+#line 1055
     if (otxn_type() != ttINVOKE)
         DONE("xahaucards-manager: not an Invoke, passing.");
 
     uint8_t tokenid[64];
     int64_t idlen = otxn_param(SBUF(tokenid), "ATTEST", 6);
 
-#line 1013
+#line 1084
     if (idlen != 32 && idlen != DOESNT_EXIST)
         NOPE("xahaucards: ATTEST must be a 32 byte URIToken id.");
 

@@ -1,0 +1,179 @@
+<!doctype html>
+<html lang="en"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1">
+<title>KVT — XahauCards Hook Review</title>
+<style>
+  :root{--paper:#faf7f0;--paper2:#f3eee1;--panel:#f6f2e6;--ink:#1c2a3a;--ink2:#3c4a5c;--muted:#6b6350;
+    --teal:#0e7c66;--teal-d:#0a5f4e;--bronze:#9a7a45;--bronze-d:#7c6238;--line:#d9cfb8;--red:#a23b2f;
+    --serif:"Iowan Old Style","Palatino Linotype","Book Antiqua",Palatino,Georgia,serif;
+    --sans:-apple-system,"Segoe UI","Helvetica Neue",Arial,sans-serif;--mono:ui-monospace,"SF Mono",Menlo,Consolas,monospace}
+  body{margin:0;background:#efe9db;color:var(--ink);font:14.5px/1.6 var(--sans)}
+  .frame{max-width:860px;margin:24px auto;border:2px solid var(--bronze);border-radius:4px;padding:5px;position:relative}
+  .frame::before{content:"";position:absolute;inset:5px;border:1px solid var(--line);border-radius:3px;pointer-events:none}
+  .sheet{background:var(--paper);padding:40px 48px;box-shadow:0 2px 16px rgba(0,0,0,.12)}
+  .top{display:flex;justify-content:space-between;align-items:flex-start;gap:20px}
+  .kick{font:600 11px var(--sans);letter-spacing:.16em;text-transform:uppercase;color:var(--bronze-d)}
+  h1{font:600 27px/1.15 var(--serif);margin:.3em 0 .15em}
+  .sub{color:var(--ink2);font:400 15px/1.5 var(--serif)}
+  .meta{margin-top:14px;font-size:12.5px;color:var(--muted)}
+  .meta b{color:var(--ink2)}
+  .seal{width:84px;height:84px;flex:none;border:2px solid var(--bronze);border-radius:50%;display:flex;align-items:center;justify-content:center;position:relative}
+  .seal::before{content:"";position:absolute;inset:6px;border:1px dashed var(--bronze);border-radius:50%}
+  .seal .disc{width:50px;height:50px;border-radius:50%;background:var(--teal);color:#fff;display:flex;align-items:center;justify-content:center;font-size:24px}
+  h2{font:600 12px var(--sans);letter-spacing:.14em;text-transform:uppercase;color:var(--bronze-d);border-bottom:1px solid var(--line);padding-bottom:5px;margin:30px 0 12px}
+  h3{font:600 16px/1.3 var(--serif);color:var(--ink);margin:20px 0 4px}
+  .verdict{display:flex;align-items:center;gap:18px;border-left:5px solid var(--teal);background:linear-gradient(90deg,#e8f4f0,#f6f2e6);padding:14px 18px;border-radius:3px;margin:18px 0}
+  .verdict .big{font:600 19px var(--serif);color:var(--teal-d);white-space:nowrap}
+  p{margin:.5em 0}
+  .mono{font-family:var(--mono);word-break:break-all;color:var(--teal-d);font-size:12.5px}
+  code{font-family:var(--mono);font-size:12.5px;color:var(--ink2);background:var(--paper2);padding:1px 4px;border-radius:3px}
+  table{border-collapse:collapse;width:100%;font-size:13.5px;margin:8px 0}
+  th{text-align:left;font:600 11px var(--sans);letter-spacing:.08em;text-transform:uppercase;color:var(--bronze-d);border-bottom:1px solid var(--line);padding:6px 10px}
+  td{padding:7px 10px;border-bottom:1px solid var(--line);vertical-align:top}
+  .box{background:#fbf5ec;border:1px solid var(--line);border-radius:4px;padding:14px 18px;margin:18px 0}
+  .box .lbl{color:var(--red);font:600 11px var(--sans);letter-spacing:.12em;text-transform:uppercase}
+  .tealbox{background:#eef6f3;border:1px solid #bfe0d6;border-radius:4px;padding:14px 18px;margin:18px 0}
+  .tealbox .lbl{color:var(--teal-d);font:600 11px var(--sans);letter-spacing:.12em;text-transform:uppercase}
+  ul{margin:.4em 0;padding-left:22px} li{margin:.3em 0}
+  .tag{display:inline-block;font:600 10.5px var(--sans);letter-spacing:.06em;text-transform:uppercase;padding:2px 7px;border-radius:3px;vertical-align:middle}
+  .tag-q{background:#efe6cf;color:var(--bronze-d)} .tag-low{background:#f1e2df;color:var(--red)} .tag-hold{background:#e2efe9;color:var(--teal-d)}
+  .att{display:flex;justify-content:space-between;gap:24px;margin-top:28px;flex-wrap:wrap}
+  .sig{font:600 20px var(--serif);color:var(--ink);border-bottom:1px solid var(--line);padding-bottom:4px;display:inline-block}
+  footer{text-align:center;color:var(--muted);font-size:12px;margin-top:26px;border-top:1px solid var(--line);padding-top:12px}
+  .repro{background:var(--panel);border:1px solid var(--line);border-radius:4px;padding:12px 14px;font-family:var(--mono);font-size:12px;color:var(--ink2);white-space:pre-wrap;word-break:break-all}
+</style></head>
+<body><div class="frame"><div class="sheet">
+
+  <div class="top">
+    <div>
+      <div class="kick">Kairo Vault Technologies &middot; Independent Verification &amp; Attestation</div>
+      <h1>XahauCards &mdash; Hook Review</h1>
+      <div class="sub">A written review of four Xahau hooks against the project's own stated rules: what holds, what is a question for the author, and what a review cannot settle.</div>
+      <div class="meta">
+        <b>Prepared for</b> XRPLWin &nbsp;·&nbsp; <b>By</b> Kairo Vault Technologies 合同会社 &nbsp;·&nbsp; <b>Date</b> 2026-09-08 &nbsp;·&nbsp; <b>Tier</b> review<br>
+        <b>Pin</b> <span class="mono">95cee8b972310b23c83bc789707be0f83d792ebb</span> &nbsp; ("Attestors allowance tests")
+      </div>
+    </div>
+    <div class="seal"><div class="disc">&#10003;</div></div>
+  </div>
+
+  <div class="verdict">
+    <div class="big">no critical<br>or high</div>
+    <div>A mature, carefully-defended codebase &mdash; visible prior-audit hardening and fail-closed defaults throughout.
+    No critical or high-severity defect was found, and that held through an adversarial pass. The output is two questions
+    for the author to settle, four low-severity items (all self-inflicted, within a trusted role, or a recoverable
+    delivery-quality residual), and a set of notes.</div>
+  </div>
+
+  <p style="font-size:13px;color:var(--ink2)">This top-line rests on two things stated plainly below and not re-proven here: the emission-forgery bar (a read of the xahaud transactor, not a transaction we ran) and the deployment bindings (namespaces, <code>KEY_SHOP</code>/<code>ISSUER</code>/<code>CLAIM</code>), which live in the <code>SetHook</code> install, not the source.</p>
+
+  <h2>Scope &amp; method</h2>
+  <p>Four hooks across two accounts, at the pin above. <b>Shop account:</b> <code>shop.c</code> (payment gate), <code>doors.c</code> (grant / allowance admin). <b>Issuer account:</b> <code>mint.c</code> (roll + mint), <code>manager.c</code> (admin + attestor signatures). Shared: <code>namespaces.h</code>, <code>trigger.h</code>. The source read is <code>hook/src/</code> &mdash; the tree that builds <code>hook/build/*.wasm</code>.</p>
+  <p>This is a <b>review, not a formal proof</b>: each rule reads as <b>holds</b>, <b>fails with a stated input</b>, or <b>out of reach of a static read</b>. The rules checked are your own (the whitepaper's invariants and the 61 checks in <code>hook/live-test.mjs</code>). The state contract and trigger/callback were read in full; each hook was read against its rules; an <b>adversarial pass</b> then tried to break every "holds"; the protocol facts the findings depend on were checked against <b>xahaud source</b> and <b>live Xahau testnet state</b>; the draft was put through an internal red-team and a protocol/calibration panel. Every finding cites <code>file:line</code>; where a claim rests on a source read rather than a run, that is said.</p>
+
+  <h2>Summary</h2>
+  <table>
+    <tr><th>Area</th><th>Result</th></tr>
+    <tr><td>Payment gate (<code>shop.c</code>)</td><td>all 8 payment/intent rules <b>hold</b></td></tr>
+    <tr><td>Grant / allowance admin (<code>doors.c</code>)</td><td>authorization <b>holds</b>; the hot key cannot raise its own limit</td></tr>
+    <tr><td>Roll + mint (<code>mint.c</code>)</td><td>fairness invariants <b>hold</b>; 1 edition-key question, 1 annotation-ordering residual</td></tr>
+    <tr><td>Attestor signatures (<code>manager.c</code>)</td><td>signature + allowance rules <b>hold</b></td></tr>
+    <tr><td>Composition (4 hooks together)</td><td><b>sound</b> &mdash; namespaces separated, no clobber path</td></tr>
+    <tr><td>Auth / funds (adversarial)</td><td><b>no bypass</b> &mdash; emission forgery barred in the transactor (source-read)</td></tr>
+  </table>
+
+  <h2>Questions for you to settle</h2>
+  <p style="color:var(--muted);font-size:13px">Not defects &mdash; places where only you can say which reading is authoritative.</p>
+
+  <h3><span class="tag tag-q">Question</span> &nbsp;Q1 &mdash; Edition numbering is keyed per full card code, not per subject</h3>
+  <p><code>mint.c:831/837</code> key the edition counter by the whole 17-byte code (<code>CODE_LEN = 17</code>), i.e. <span class="mono">XC-&lt;theme&gt;-&lt;subject&gt;-&lt;rarity&gt;-&lt;attack&gt;-&lt;health&gt;</span>, <b>including the rolled stats</b>. Confirmed in source and in live state (on-chain edition keys read e.g. <span class="mono">XC-01-061-C-03-04</span>). So the same subject rolled with different stats, or at a different rarity, gets <b>independent</b> edition sequences each starting at #1. <b>We read the whitepaper's numbering as "per subject";</b> the code keys per full card code. If we've read the whitepaper right, those are two different scarcity models, and the number is sealed into immutable metadata at mint. Which is authoritative is yours to state; if per-subject is intended, the key length at <code>:831/837</code> would need to cover the subject only.</p>
+
+  <h3><span class="tag tag-q">Question</span> &nbsp;Q2 &mdash; A non-XAH (IOU) payment to the shop is accepted, not bounced</h3>
+  <p><code>shop.c:191-192</code>: a payment whose <code>sfAmount</code> is not native is <b>accepted</b> (<code>tesSUCCESS</code>), documented as "not XAH, passing… received, not bounced". It records <b>no</b> purchase, so the "records no purchase" rule holds. The only open question is whether <i>receiving</i> an IOU here (rather than rejecting it) is intended. Your call.</p>
+
+  <h2>Low-severity findings</h2>
+  <p style="color:var(--muted);font-size:13px">None lets an outside party steal funds, mint a pack, or sign as someone else &mdash; self-inflicted, confined to a trusted role, or a recoverable residual. Reported for completeness and hardening.</p>
+
+  <h3><span class="tag tag-low">Low</span> &nbsp;L1 &mdash; A failed delivery Remit leaves the buyer with nothing and no on-ledger claim</h3>
+  <p>The lifecycle promises "paid → cards, or a recorded claim" (<code>shop.c:80-86</code>). There is a window where neither holds. The mint applies at L+1 and emits five Remits (the cards) for L+2; the callback keys off the <b>mint's</b> result, which is <code>tesSUCCESS</code> (it emitted fine), so it <b>deletes</b> the intent record (<code>trigger.h</code>). The five Remits resolve at L+2 with no callback watching. <b>If any Remit fails at L+2, the intent is already gone &mdash; the buyer paid, got nothing, and there is no record that anything is owed.</b></p>
+  <p>The clearest trigger: a buyer who passes the receivability check at purchase (<code>shop.c:338-349</code>) then sets <code>lsfDisallowIncomingRemit</code> before L+2; <code>mint.c</code> does not re-check (no flag reference in the file), and a Remit to such an account fails <code>tecNO_PERMISSION</code> (xahaud <code>Remit.cpp:294-296</code>) <b>atomically &mdash; no token is minted anywhere</b>. That case is <b>self-inflicted</b> (only the account owner can set the flag; no attacker profit), which anchors it at low. But two parts are structural: the callback comment (<code>trigger.h:316-318</code>) wrongly calls this "a card minted to the issuer… card in hand" &mdash; for any atomic Remit <code>tec</code> no card is minted at all; and the record is deleted before delivery is confirmed, so <i>any</i> L+2 Remit <code>tec</code> leaves a paid buyer with no claim. <b>Recommend:</b> correct the comment, ensure recovery tooling does not treat "no FAILED record" as proof of delivery, and (to close it outright) re-check the buyer's flags in <code>mint.c</code> before minting.</p>
+
+  <h3><span class="tag tag-low">Low</span> &nbsp;L2 &mdash; Card annotation depends on emitted-transaction apply order (measured to hold; not source-guaranteed)</h3>
+  <p>Per card, <code>mint.c</code> emits the metadata SetRemarks <b>before</b> the Remit that mints the token (<code>:1160-1183</code> then <code>:1187-1222</code>), and a SetRemarks on a not-yet-existent token fails <code>tecNO_TARGET</code>, which is final. So a card's metadata depends on the mint applying first.</p>
+  <div class="tealbox"><span class="lbl">Measured &mdash; holds across the full deployment</span>
+  <p style="margin:.5em 0 0">On the testnet issuer, the <b>entire</b> transaction history shows <b>73 metadata SetRemarks, all <code>tesSUCCESS</code>, and 70 mint Remits, all <code>tesSUCCESS</code> &mdash; zero <code>tecNO_TARGET</code></b> (and <code>account_tx</code> includes failed <code>tec</code> transactions, so this is not a "only complete cards are visible" artifact). Directly: in 25 of 25 paired cases the mint Remit applies at a lower in-ledger index than its SetRemarks. No card has ever landed un-annotated.</p></div>
+  <p>But we could <b>not</b> establish the ordering as a protocol guarantee from source &mdash; the rule that orders same-account, sequence-0 <i>emitted</i> transactions within a ledger is not one we could pin down (a naive read predicts intermittent failure, which the evidence contradicts, so emitted transactions are ordered by a rule we did not locate). It holds in practice; we cannot prove it must. <b>Recommend</b> cheap insurance rather than reliance: issuer-side tooling that detects any minted URIToken lacking its meta remarks and re-emits the SetRemarks &mdash; recoverable, because those remarks are not sealed until written &mdash; or a confirmation of the emitted-ordering rule from the xahaud maintainers.</p>
+
+  <h3><span class="tag tag-low">Low</span> &nbsp;L3 &mdash; An enrolled attestor can pre-sign any card and repoint its art</h3>
+  <p><code>attest()</code> lets any roll member sign any card this issuer minted (<code>manager.c:553</code>). A card takes one signature, first-writer-wins (<code>:719-726</code>), and signing seals <code>meta.1</code>'s image URL to the signer's slot (<code>:924-956</code>). A malicious or careless roll member could pre-sign cards to block the intended signer and repoint the art, spending their own SIGS allowance. Bounded by that allowance, requires roll membership (semi-trusted by design), cannot move funds, mint, or sign as another attestor. A design tradeoff, not an authorization break.</p>
+
+  <h3><span class="tag tag-low">Low</span> &nbsp;L4 &mdash; Same-ledger duplicate signature over-spends the signer's own allowance</h3>
+  <p>The duplicate-signature scan (<code>manager.c:648-726</code>) reads the card's current on-ledger remarks, so two Invokes for the same card in the same ledger both pass it, both decrement the allowance (<code>:742-745</code>), and the second's SetRemarks fails <code>tecIMMUTABLE</code> a ledger later. Net: that slot's own allowance drops by two for one signature. Self-harm only, consistent with the documented spend-before-emit stance (<code>:730-741</code>). Your call whether it warrants a guard.</p>
+
+  <h2>Per-hook &mdash; what holds</h2>
+  <h3><span class="tag tag-hold">Holds</span> &nbsp;shop.c &mdash; payment gate</h3>
+  <p>One state write only &mdash; <code>state_set(intent, txid)</code> at <code>:409</code>, own namespace, accept path, after every validation check, before the emit; no write on any reject path (a refused purchase records nothing, strongly). Exact price both directions (<code>:240</code>); partial-payment rejected with a correct sign-guard (<code>:181-183</code>); THEME exactly two bytes (<code>:255</code>); set-exists (<code>:276</code>) and on-sale (<code>:304</code>); buyer receivability checked (<code>:338-349</code>); budget-below-price guard (<code>:369</code>). Intent keyed by the unique Payment txid. <i>Note:</i> THEME digit-ness is enforced only by the table lookup &mdash; holds because only <code>cards:export</code> writes those keys.</p>
+
+  <h3><span class="tag tag-hold">Holds</span> &nbsp;doors.c &mdash; grant + allowance admin</h3>
+  <p>GRANT gated on sender == issuer <code>KEY_CLAIM</code> (<code>:153-160</code>), fail-closed if unset; ALLOW gated on sender == the shop account itself (<code>:352-359</code>), capped at <code>GRANTS_MAX</code>. <b>The two use different sender checks, so the always-online claim key can spend the allowance but cannot raise it</b> &mdash; a compromised claim authority is bounded to <code>allowance × ≤10 XAH</code>. Writes only the shop's own namespace; the removed WITHDRAW door leaves no dangling reads.</p>
+
+  <h3><span class="tag tag-hold">Holds</span> &nbsp;mint.c &mdash; roll + mint</h3>
+  <ul>
+    <li><b>Seed / no buyer grind.</b> <code>seed = sha512half(parent_txid ‖ ledger_last_hash())</code> (<code>:643-648</code>); <code>ledger_last_hash()</code> is the hash of the ledger the buyer's Payment landed in (xahaud <code>HookAPI.cpp</code>), and the trigger provably executes at L+1, so the reveal hash post-dates the buyer's signature. No reroll path (the callback does not re-emit).</li>
+    <li><b>Independently re-derived from public data (free cross-check).</b> We reproduced a real minted pack end to end from public inputs alone &mdash; buyer payment <span class="mono">712EEBCF…</span>, <code>ledger_last_hash</code> <span class="mono">EAF06F0F…</span>, and the on-chain shape record &mdash; and the five re-derived card codes match the five actually minted on-chain (identical as a set; only the mint order differs). So the roll is a pure, reproducible function of chain data with no operator input &mdash; verified from outside the code. Runnable script included.</li>
+    <li><i>Disclosed residual (in your source):</i> the five-ledger emit window lets whoever <i>includes</i> the trigger pick among ≤5 candidate hashes. Legendary is 2/256 per card, so ~3.85% chance of ≥1 legendary in a five-card pack, which a proposer choosing among five candidate seeds (and willing to burn packs) could lift to ~17.8%. Only a block proposer, only by burning packs, never the buyer &mdash; strictly weaker than the payer-grind the design closes.</li>
+    <li><b>Rarity strip / stat bands.</b> <code>:724-725</code> partitions 0..255 into 150/70/26/8/2 exactly; <code>:369-370</code> give contiguous non-overlapping stat bands, membership enforced by construction, legendary pinned 20/20.</li>
+    <li><b>Five new tokens to the buyer</b> (buyer from the intent record, not the trigger sender). Metadata / seal flags corroborated on the inspected card <span class="mono">XC-01-026-C-04-04</span>: meta.0 immutable, meta.1 mutable, meta.2 immutable, schema immutable.</li>
+    <li><i>Notes:</i> table-sourced strings are copied into card JSON without escaping (<code>:944, :973-977</code>) &mdash; relies on the admin door / loader to reject <code>"</code>/<code>\</code>; every sellable set must populate all five rarities or a share of packs fail-closed (<code>:737</code>).</li>
+  </ul>
+
+  <h3><span class="tag tag-hold">Holds</span> &nbsp;manager.c &mdash; admin + attestor signatures</h3>
+  <p>Admin gated on <code>hook_account == sender</code> (<code>:125-126</code>) &mdash; the issuer only; this is the <code>KEY_CLAIM</code> write-guard doors.c depends on. Signing requires an issuer-written roll entry keyed by the sender (<code>:574-579</code>) &mdash; no self-enrol. The signature allowance is fail-closed on absent/malformed and decremented only after every check, before the emit (<code>:611-617, :742-745</code>). The junk-URIToken sign attack is closed (<code>URI_MIN_LEN</code> + scheme/offset checks + issuer==hook, <code>:894-905, :632-645</code>). The full signature lifecycle is corroborated on real cards: an unsigned card carries <code>meta.1</code> <b>mutable</b>; a signed card (<span class="mono">XC-01-366-R-10-12</span>) carries <code>CardSignature</code> immutable, <code>meta.1</code> now <b>immutable</b> (sealed by signing), and is owned by a <b>buyer, not the issuer</b>.</p>
+
+  <h2>Composition &mdash; the four hooks together</h2>
+  <p>Namespaces are separated by design; <code>shop.c</code>/<code>doors.c</code> write only <code>NS_INTENT</code>, <code>mint.c</code> only <code>NS_EDITIONS</code>, <code>manager.c</code> only issuer namespaces on its own account; no hook writes another's across an account (foreign writes need an <code>sfHookGrants</code> entry &mdash; confirmed against xahaud &mdash; and none is granted but manager's own-account write). By design the four do not co-fire on one transaction. The one shared record (the intent) is keyed by the unique txid, so one purchase's record cannot touch another's. No clobber path was found.</p>
+
+  <h2>Adversarial pass &mdash; attacked and not broken</h2>
+  <ul>
+    <li><b>Forge an emission to mint a free pack</b> &mdash; blocked in the transactor (source read): a transaction carrying <code>sfEmitDetails</code> without the node's internal emitted flag is rejected (<code>telNON_LOCAL_EMITTED_TXN</code>, <code>Transactor.cpp:127-148</code>), the network refuses emitted transactions off the wire, and an emitted transaction's sender must equal the emitting hook's own account (<code>HookAPI.cpp</code> rule 0). The issuer's gate (sender == <code>KEY_SHOP</code> <b>and</b> <code>sfEmitDetails</code>) only accepts a genuine emission from the shop's own hooks.</li>
+    <li><b>Underpay / IOU / partial-payment</b> &mdash; blocked at <code>shop.c</code>. <b>Grant forgery / over-drain</b> &mdash; blocked (claim-key check, allowance floor and ceiling, no counter wrap, 10-XAH cap). <b>Sign without being an attestor / sign a non-card</b> &mdash; blocked. <b>Admin action by a non-issuer</b> &mdash; blocked. <b>Clobber another hook's state / forge an intent to claim a refund</b> &mdash; blocked. <b>Roll grinding by a buyer, double-mint of one payment, edition collision, cheap griefing</b> &mdash; all hold.</li>
+  </ul>
+
+  <div class="box">
+    <div class="lbl">Assumptions accepted, not re-verified &mdash; part of this review</div>
+    <ul style="margin:.5em 0 0">
+      <li>The emission-forgery bar is a <b>read of the xahaud transactor</b>, not a transaction we submitted. It is the linchpin of "no free pack".</li>
+      <li>The callback's delivery decision reads the trigger's engine result (<code>sfTransactionResult</code>, <code>trigger.h</code>); the source comment says this was measured on testnet &mdash; we did not re-run it.</li>
+      <li>Edition-collision freedom relies on per-transaction hook-state commit within a ledger (standard Xahau behaviour, and what <code>mint.c:812-821</code> designs around); accepted, not independently re-run.</li>
+    </ul>
+  </div>
+
+  <div class="box">
+    <div class="lbl">Out of scope for this tier / to confirm on the deploy side</div>
+    <ul style="margin:.5em 0 0">
+      <li><b>Deployment bindings</b> (not in the source): each hook's installed <code>HookNamespace</code> must equal its <code>NS_*</code> constant; the <code>HookCanEmit</code> grants; the <code>ISSUER</code> parameter and the <code>SHOP</code>/<code>CLAIM</code> settings. Worth a checklist against <code>deploy.mjs</code>.</li>
+      <li><b>The installed wasm bytes.</b> This review reads the source that builds them; it does not prove the deployed <code>hook/build/*.wasm</code> is that source. Matching the published build hash to the deployed <code>HookHash</code> closes that gap &mdash; the proof tier does this against the bytes.</li>
+      <li><b>The loader's input validation</b> &mdash; several mint-side safeties (JSON-breaking characters, table record widths) are backstops that assume the admin door / loader rejects bad input on the way in.</li>
+    </ul>
+  </div>
+
+  <h2>Reproduce this review</h2>
+  <div class="repro">Clone the repo at 95cee8b972310b23c83bc789707be0f83d792ebb; the reviewed files are under hook/src/. Every finding cites file:line.
+On-chain checks read testnet issuer rhi2ndQkEmV5x1t7YisEKUF3J8tw4VnJ83 (full tx history + a minted card's remarks).
+Independent pack re-derivation: node rederive.mjs  (matches on-chain cards from public data).
+Protocol facts cite xahaud: Transactor.cpp, HookAPI.cpp, SetRemarks.cpp, Remit.cpp, CanonicalTXSet.cpp.</div>
+
+  <div class="att">
+    <div class="who">
+      <div class="sig">Dane Brown</div>
+      <div style="color:var(--muted);font-size:12px;margin-top:4px">Representative Member, <span style="white-space:nowrap">Kairo Vault Technologies 合同会社</span></div>
+    </div>
+    <div style="text-align:right;color:var(--muted);font-size:12px">
+      <span style="white-space:nowrap">Review <b>KV-IV-2026-0908-001</b></span><br>Issued 2026-09-08
+    </div>
+  </div>
+
+  <p style="font-size:11.5px;color:var(--muted);margin-top:18px;border-top:1px solid var(--line);padding-top:12px">This is a review: a written opinion against your stated rules &mdash; what holds, what is a question for you, and what a review cannot settle &mdash; with the "holds" claims put through an adversarial pass and a protocol/calibration panel, and the chain-dependent ones checked against live state and xahaud source. Where a claim rests on a source read rather than a run, that is said. It is not a formal proof and not a security audit; a proof against the installed wasm bytes, with counterexamples, is the proof tier, available after you've read this.</p>
+
+  <footer>Kairo Vault Technologies 合同会社 &middot; Independent Verification &amp; Attestation &middot; kairovault.com &middot; <span style="white-space:nowrap">Review KV-IV-2026-0908-001</span></footer>
+
+</div></div></body></html>
