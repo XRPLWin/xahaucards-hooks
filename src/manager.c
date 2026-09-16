@@ -437,7 +437,7 @@ attest(const uint8_t *tokenid)
 
     rtxn[r++] = 0xE0U; rtxn[r++] = 0x61U;
     rtxn[r++] = 0x22U;
-    rtxn[r++] = 0x00U; rtxn[r++] = 0x00U; rtxn[r++] = 0x00U; rtxn[r++] = 0x01U;
+    rtxn[r++] = 0x00U; rtxn[r++] = 0x00U; rtxn[r++] = 0x00U; rtxn[r++] = 0x00U;
 
     rtxn[r++] = 0x70U; rtxn[r++] = 0x62U;
 
@@ -462,7 +462,7 @@ attest(const uint8_t *tokenid)
 
     int image_len = r - image_from;
 
-#line 978
+#line 981
     if (image_len < 1 || image_len > 192)
         NOPE("xahaucards: the image value came out the wrong length.");
 
@@ -496,7 +496,7 @@ attest(const uint8_t *tokenid)
 
     uint8_t emit_hash[32];
 
-#line 1018
+#line 1021
     if (emit(SBUF(emit_hash), rtxn, r) < 0)
         NOPE("xahaucards: could not emit the signature.");
 
@@ -509,7 +509,7 @@ attest(const uint8_t *tokenid)
     BLIT64(said + m, raddr);
     m += (int)raddr_len;
 
-#line 1038
+#line 1041
     return accept(said, (uint32_t)m, __LINE__);
 }
 
@@ -518,14 +518,14 @@ hook(uint32_t reserved)
 {
     _g(1, 1);
 
-#line 1055
+#line 1058
     if (otxn_type() != ttINVOKE)
         DONE("xahaucards-manager: not an Invoke, passing.");
 
     uint8_t tokenid[64];
     int64_t idlen = otxn_param(SBUF(tokenid), "ATTEST", 6);
 
-#line 1084
+#line 1087
     if (idlen != 32 && idlen != DOESNT_EXIST)
         NOPE("xahaucards: ATTEST must be a 32 byte URIToken id.");
 

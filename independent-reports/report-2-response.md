@@ -3,6 +3,9 @@
 Response to [report-2/REPORT.md](report-2/REPORT.md), the hook review by Kairo Vault Technologies
 合同会社, dated 2026-09-08. Written 2026-09-08.
 
+Reference:  
+https://kairovault.com/reviews/KV-IV-2026-0908-001.html
+
 The report's own files are published exactly as delivered. Their SHA-256 digests,
 as the author gave them, and verified against the copies in `report-2/`:
 
